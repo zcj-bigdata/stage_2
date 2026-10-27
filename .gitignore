@@ -1,0 +1,26 @@
+# Maven
+target/
+
+# Data generated at runtime, at the root or inside a module folder.
+# Anchored on purpose: a plain "control/" would also hide the source
+# package src/main/java/com/zcj/control (the Stage 1 .gitignore bug).
+/datalake/
+/datamarts/
+/control/
+/*/datalake/
+/*/datamarts/
+/*/control/
+*.db
+*.db-wal
+*.db-shm
+
+# Benchmark results
+benchmarks/results/
+jmh-result.*
+
+# IDE and OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+desktop.ini
