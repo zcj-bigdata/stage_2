@@ -129,6 +129,25 @@ same body:
 
 **Benchmarks**: JMH benchmarks go in `src/test/java` of each module, never in `src/main`.
 
+## API specification and validation
+
+- [`docs/api/openapi.yaml`](docs/api/openapi.yaml): versioned OpenAPI 3.0 specification of
+  every endpoint (front-end, internal and operational).
+- [`docs/api/endpoints.md`](docs/api/endpoints.md): endpoint inventory separated by consumer.
+- [`docs/api/examples/search.http`](docs/api/examples/search.http): runnable HTTP examples of
+  the front-end API with their expected results.
+- Automated checks of the front-end contract run with the build
+  (`search-service/src/test/java/com/zcj/search/SearchApiTest.java`).
+
+To try the Search Service without the rest of the pipeline, fill the datamart with the
+sample books and start it:
+
+```bash
+java -cp search-service/target/search-service-1.0.0.jar com.zcj.search.SampleDataSeeder sample_data
+java -jar search-service/target/search-service-1.0.0.jar
+curl "http://localhost:7003/search?q=darcy"
+```
+
 ## Sample dataset
 
 `sample_data/` contains five Gutenberg books (11, 84, 98, 1342, 1661) for offline tests.

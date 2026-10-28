@@ -1,0 +1,71 @@
+### Front-end API examples (Search Service)
+#
+# Run them from IntelliJ (green arrow next to each request) or copy them to curl.
+# Prepare the datamart with the five sample books first:
+#   java -cp search-service/target/search-service-1.0.0.jar com.zcj.search.SampleDataSeeder sample_data
+#   java -jar search-service/target/search-service-1.0.0.jar
+#
+# The expected result of each request is written above it.
+# The same checks run automatically in search-service/src/test/java/com/zcj/search/SearchApiTest.java
+
+@search = http://localhost:7003
+
+### Keyword search -> 200, total 1: book 1342, hits 432
+GET {{search}}/search?q=darcy
+
+### Several words (AND) -> 200: books 84 and 98, ordered by hits
+GET {{search}}/search?q=monster%20creature
+
+### Filter by author -> 200: only 1342
+GET {{search}}/search?q=love&author=austen
+
+### Filter by language -> 200, total 5
+GET {{search}}/search?q=the&language=en
+
+### Filter by year -> 200: only 1342
+GET {{search}}/search?q=the&year=1998
+
+### Combined filters -> 200: only 1661
+GET {{search}}/search?q=the&author=doyle&language=en&year=1999
+
+### Valid query without matches -> 200, total 0, results []
+GET {{search}}/search?q=zzzzqx
+
+### Pagination, page 1 -> 200, total 5, 2 results (books 98 and 1661)
+GET {{search}}/search?q=the&offset=0&limit=2
+
+### Pagination, page 2 -> 200, total 5, the next 2 results
+GET {{search}}/search?q=the&offset=2&limit=2
+
+### Page beyond the end -> 200, total 5, results []
+GET {{search}}/search?q=the&offset=10&limit=2
+
+### Missing q -> 400 invalid_parameter
+GET {{search}}/search
+
+### q without letters -> 400 invalid_parameter
+GET {{search}}/search?q=123
+
+### limit out of range -> 400 invalid_parameter
+GET {{search}}/search?q=the&limit=500
+
+### year not an integer -> 400 invalid_parameter
+GET {{search}}/search?q=the&year=nineteen
+
+### Invalid language code -> 400 invalid_parameter
+GET {{search}}/search?q=the&language=english
+
+### Book details -> 200: Pride and Prejudice
+GET {{search}}/books/1342
+
+### Unknown book -> 404 not_found
+GET {{search}}/books/999999
+
+### Invalid book id -> 400 invalid_parameter
+GET {{search}}/books/abc
+
+### Filter values -> 200: languages, years and authors with their number of books
+GET {{search}}/search/filters
+
+### Health check -> 200
+GET {{search}}/status
