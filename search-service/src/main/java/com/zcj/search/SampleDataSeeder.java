@@ -21,26 +21,54 @@ import java.util.stream.Stream;
  * Indexing Service. The real pipeline uses the Indexing Service instead.
  *
  * <pre>
- *   java -cp search-service/target/search-service-1.0.0.jar com.zcj.search.SampleDataSeeder [sample_data]
+ *   java -cp search-service/target/search-service-1.0.0.jar com.zcj.search.SampleDataSeeder [sample_data] [books]
  * </pre>
+ *
+ * Without {@code books}, the sample books are stored with their real ids. With
+ * {@code books = N}, the sample books are repeated until N books are stored, with the
+ * synthetic ids 100000, 100001... (used by the load benchmark to get a larger index).
  *
  * Each book is written in its own transaction with INSERT OR REPLACE, so running the
  * tool several times does not create duplicates.
  */
 public class SampleDataSeeder {
 
+    public static final int FIRST_SYNTHETIC_ID = 100_000;
+
     public static void main(String[] args) throws Exception {
         Path sampleDir = Path.of(args.length > 0 ? args[0] : "sample_data");
-        int books = seed(sampleDir, Config.dbPath());
+        int books = args.length > 1
+                ? seedSynthetic(sampleDir, Config.dbPath(), Integer.parseInt(args[1]))
+                : seed(sampleDir, Config.dbPath());
         System.out.println("Seeded " + books + " books into " + Config.dbPath());
+    }
+
+    /** Stores {@code count} books by cycling over the sample books, with synthetic ids. */
+    public static int seedSynthetic(Path sampleDir, String dbPath, int count) throws Exception {
+        List<Path> files = sampleFiles(sampleDir);
+        List<String> texts = new ArrayList<>();
+        for (Path file : files) {
+            texts.add(Files.readString(file));
+        }
+        try (Connection conn = Database.open(dbPath)) {
+            Database.createSchema(conn);
+            for (int i = 0; i < count; i++) {
+                int source = i % files.size();
+                index(conn, FIRST_SYNTHETIC_ID + i, texts.get(source), files.get(source).toString());
+            }
+        }
+        return count;
+    }
+
+    private static List<Path> sampleFiles(Path sampleDir) throws Exception {
+        try (Stream<Path> stream = Files.list(sampleDir)) {
+            return stream.filter(p -> p.getFileName().toString().matches("pg\\d+\\.txt")).sorted().toList();
+        }
     }
 
     /** Indexes every pg&lt;id&gt;.txt file of the folder. Returns the number of books. */
     public static int seed(Path sampleDir, String dbPath) throws Exception {
-        List<Path> files;
-        try (Stream<Path> stream = Files.list(sampleDir)) {
-            files = stream.filter(p -> p.getFileName().toString().matches("pg\\d+\\.txt")).sorted().toList();
-        }
+        List<Path> files = sampleFiles(sampleDir);
 
         try (Connection conn = Database.open(dbPath)) {
             Database.createSchema(conn);
