@@ -106,22 +106,36 @@ public class App {
             int totalPostings = 0;
 
             try (Connection conn = Database.openFromConfig()) {
-                for (int bookId : bookIds) {
-                    if (!Files.isRegularFile(datalake.bodyPath(bookId))) {
-                        throw new IOException(
-                                "Body file not found for book " + bookId
-                        );
+                boolean previousAutoCommit = conn.getAutoCommit();
+
+                try {
+                    conn.setAutoCommit(false);
+
+                    for (int bookId : bookIds) {
+                        BookIndexer.IndexResult result =
+                                BookIndexer.indexBookInTransaction(
+                                        conn, datalake, bookId
+                                );
+
+                        totalTokens += result.totalTokens();
+                        totalPostings += result.uniqueTerms();
                     }
 
-                    BookIndexer.IndexResult result =
-                            BookIndexer.indexBook(conn, datalake, bookId);
+                    removeBooksNotInDatalake(conn, bookIds);
 
-                    totalTokens += result.totalTokens();
-                    totalPostings += result.uniqueTerms();
+                    conn.commit();
+
+                } catch (SQLException | IOException | RuntimeException e) {
+                    try {
+                        conn.rollback();
+                    } catch (SQLException rollbackError) {
+                        e.addSuppressed(rollbackError);
+                    }
+                    throw e;
+
+                } finally {
+                    conn.setAutoCommit(previousAutoCommit);
                 }
-
-                // Remove records for books no longer present in the datalake.
-                removeBooksNotInDatalake(conn, bookIds);
             }
 
             Map<String, Object> response = new LinkedHashMap<>();
@@ -168,58 +182,47 @@ public class App {
         }
     }
 
+    /**
+     * Removes books and postings that are no longer present in the datalake.
+     * This method participates in the caller's transaction.
+     */
     private static void removeBooksNotInDatalake(
             Connection conn,
             Set<Integer> bookIds
     ) throws SQLException {
 
-        boolean previousAutoCommit = conn.getAutoCommit();
+        List<Integer> staleBookIds = new ArrayList<>();
 
-        try {
-            conn.setAutoCommit(false);
+        try (PreparedStatement select =
+                     conn.prepareStatement("SELECT book_id FROM books");
+             ResultSet rs = select.executeQuery()) {
 
-            if (bookIds.isEmpty()) {
-                try (PreparedStatement postings =
-                             conn.prepareStatement("DELETE FROM postings")) {
-                    postings.executeUpdate();
-                }
+            while (rs.next()) {
+                int bookId = rs.getInt("book_id");
 
-                try (PreparedStatement books =
-                             conn.prepareStatement("DELETE FROM books")) {
-                    books.executeUpdate();
-                }
-            } else {
-                String placeholders = String.join(
-                        ",", java.util.Collections.nCopies(bookIds.size(), "?")
-                );
-
-                String sql = "DELETE FROM books WHERE book_id NOT IN ("
-                        + placeholders + ")";
-
-                try (PreparedStatement books = conn.prepareStatement(sql)) {
-                    int index = 1;
-                    for (int bookId : bookIds) {
-                        books.setInt(index++, bookId);
-                    }
-                    books.executeUpdate();
-                }
-
-                try (PreparedStatement postings = conn.prepareStatement("""
-                        DELETE FROM postings
-                        WHERE book_id NOT IN (SELECT book_id FROM books)
-                        """)) {
-                    postings.executeUpdate();
+                if (!bookIds.contains(bookId)) {
+                    staleBookIds.add(bookId);
                 }
             }
+        }
 
-            conn.commit();
+        try (PreparedStatement deletePostings =
+                     conn.prepareStatement(
+                             "DELETE FROM postings WHERE book_id = ?");
+             PreparedStatement deleteBooks =
+                     conn.prepareStatement(
+                             "DELETE FROM books WHERE book_id = ?")) {
 
-        } catch (SQLException | RuntimeException e) {
-            conn.rollback();
-            throw e;
+            for (int bookId : staleBookIds) {
+                deletePostings.setInt(1, bookId);
+                deletePostings.addBatch();
 
-        } finally {
-            conn.setAutoCommit(previousAutoCommit);
+                deleteBooks.setInt(1, bookId);
+                deleteBooks.addBatch();
+            }
+
+            deletePostings.executeBatch();
+            deleteBooks.executeBatch();
         }
     }
 }
