@@ -14,10 +14,11 @@ import java.util.Map;
 /**
  * Read-only access to the datamart written by the Indexing Service.
  *
- * Every request opens its own connection, so the Javalin request threads never share
- * a JDBC connection. Each search runs the count and the page query inside one read
- * transaction: with WAL mode both see the same committed snapshot, so a book that is
- * being indexed at that moment is either fully visible or not visible at all.
+ * JDBC connections are never shared between Javalin request threads: either each
+ * request opens its own connection, or each thread keeps one open and reuses it
+ * ({@code reuseConnections}). Each search runs the count and the page query inside one
+ * read transaction: with WAL mode both see the same committed snapshot, so a book that
+ * is being indexed at that moment is either fully visible or not visible at all.
  */
 public class SearchRepository {
 
@@ -26,9 +27,16 @@ public class SearchRepository {
             "(LENGTH(p.positions) - LENGTH(REPLACE(p.positions, ',', '')) + 1)";
 
     private final String dbPath;
+    private final boolean reuseConnections;
+    private final ThreadLocal<Connection> threadConnection = new ThreadLocal<>();
 
     public SearchRepository(String dbPath) {
+        this(dbPath, true);
+    }
+
+    public SearchRepository(String dbPath, boolean reuseConnections) {
         this.dbPath = dbPath;
+        this.reuseConnections = reuseConnections;
     }
 
     public record BookResult(int bookId, String title, String author, String language,
@@ -71,7 +79,7 @@ public class SearchRepository {
 
         String matches = sql.toString();
 
-        try (Connection conn = Database.open(dbPath)) {
+        return withConnection(conn -> {
             conn.setAutoCommit(false);  // one read transaction = one consistent snapshot
             try {
                 long total;
@@ -102,34 +110,73 @@ public class SearchRepository {
                 return new Page(total, results);
             } finally {
                 conn.commit();
+                conn.setAutoCommit(true);
             }
-        }
+        });
     }
 
     public Book findBook(int bookId) throws SQLException {
-        try (Connection conn = Database.open(dbPath);
-             PreparedStatement ps = conn.prepareStatement(
-                     "SELECT book_id, title, author, language, year FROM books WHERE book_id = ?")) {
-            ps.setInt(1, bookId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (!rs.next()) {
-                    return null;
+        return withConnection(conn -> {
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "SELECT book_id, title, author, language, year FROM books WHERE book_id = ?")) {
+                ps.setInt(1, bookId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (!rs.next()) {
+                        return null;
+                    }
+                    return new Book(rs.getInt("book_id"), rs.getString("title"), rs.getString("author"),
+                            rs.getString("language"), (Integer) rs.getObject("year"));
                 }
-                return new Book(rs.getInt("book_id"), rs.getString("title"), rs.getString("author"),
-                        rs.getString("language"), (Integer) rs.getObject("year"));
             }
-        }
+        });
     }
 
     /** Values available for the filters, with the number of books of each one. */
     public Map<String, Object> filterValues() throws SQLException {
-        Map<String, Object> filters = new LinkedHashMap<>();
-        try (Connection conn = Database.open(dbPath)) {
+        return withConnection(conn -> {
+            Map<String, Object> filters = new LinkedHashMap<>();
             filters.put("languages", counts(conn, "language"));
             filters.put("years", counts(conn, "year"));
             filters.put("authors", counts(conn, "author"));
+            return filters;
+        });
+    }
+
+    // ----------------------------------------------------------------- connections
+
+    @FunctionalInterface
+    private interface SqlWork<T> {
+        T run(Connection conn) throws SQLException;
+    }
+
+    /**
+     * Runs {@code work} with a connection. With reuse enabled, each request thread keeps
+     * its own connection open (connections are never shared between threads); otherwise
+     * a new connection is opened and closed for every request.
+     */
+    private <T> T withConnection(SqlWork<T> work) throws SQLException {
+        if (!reuseConnections) {
+            try (Connection conn = Database.open(dbPath)) {
+                return work.run(conn);
+            }
         }
-        return filters;
+        Connection conn = threadConnection.get();
+        if (conn == null || conn.isClosed()) {
+            conn = Database.open(dbPath);
+            threadConnection.set(conn);
+        }
+        try {
+            return work.run(conn);
+        } catch (SQLException e) {
+            // Discard a connection that failed, the next request opens a new one
+            threadConnection.remove();
+            try {
+                conn.close();
+            } catch (SQLException ignored) {
+                // already broken
+            }
+            throw e;
+        }
     }
 
     private static List<Map<String, Object>> counts(Connection conn, String column) throws SQLException {

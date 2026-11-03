@@ -20,21 +20,28 @@ import java.sql.Connection;
  *   PORT            default 7003
  *   DB_PATH         default datamarts/search.db
  *   SEARCH_THREADS  maximum number of request threads (default 200, Javalin's default)
+ *   SEARCH_REUSE_CONNECTIONS  true (default): each request thread reuses its own SQLite
+ *                   connection; false: a new connection is opened for every request
  *   CORS_ORIGIN     origin allowed for a browser front-end (default: any origin)
  */
 public class App {
 
     public static void main(String[] args) throws Exception {
-        start(Config.port(Config.SEARCH_PORT), Config.dbPath(), Config.getInt("SEARCH_THREADS", 200));
+        start(Config.port(Config.SEARCH_PORT), Config.dbPath(), Config.getInt("SEARCH_THREADS", 200),
+                Boolean.parseBoolean(Config.get("SEARCH_REUSE_CONNECTIONS", "true")));
     }
 
     public static Javalin start(int port, String dbPath, int maxThreads) throws Exception {
+        return start(port, dbPath, maxThreads, true);
+    }
+
+    public static Javalin start(int port, String dbPath, int maxThreads, boolean reuseConnections) throws Exception {
         // The tables are created here too so that the service starts before the first indexing
         try (Connection conn = Database.open(dbPath)) {
             Database.createSchema(conn);
         }
 
-        SearchController controller = new SearchController(new SearchRepository(dbPath));
+        SearchController controller = new SearchController(new SearchRepository(dbPath, reuseConnections));
         String corsOrigin = Config.get("CORS_ORIGIN", "*");
 
         Javalin app = Http.create("search-service", config -> {
