@@ -80,6 +80,8 @@
                 <configuration>
                     <skip>false</skip>
                     <executable>${java.home}/bin/java</executable>
+                    <!-- Run from the repository root, so paths are the same as in the README -->
+                    <workingDirectory>${maven.multiModuleProjectDirectory}</workingDirectory>
                     <classpathScope>test</classpathScope>
                     <commandlineArgs>-classpath %classpath ${benchmark.main} ${benchmark.args}</commandlineArgs>
                 </configuration>
