@@ -83,7 +83,8 @@
                     <!-- Run from the repository root, so paths are the same as in the README -->
                     <workingDirectory>${maven.multiModuleProjectDirectory}</workingDirectory>
                     <classpathScope>test</classpathScope>
-                    <commandlineArgs>-classpath %classpath ${benchmark.main} ${benchmark.args}</commandlineArgs>
+                    <!-- English locale: CSV results always use a decimal point -->
+                    <commandlineArgs>-Duser.language=en -Duser.country=US -classpath %classpath ${benchmark.main} ${benchmark.args}</commandlineArgs>
                 </configuration>
             </plugin>
         </plugins>
