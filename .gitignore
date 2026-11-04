@@ -24,3 +24,4 @@ jmh-result.*
 *.iml
 .DS_Store
 desktop.ini
+datalake-http-test/
