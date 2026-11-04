@@ -1,8 +1,10 @@
+
 package com.zcj.indexing;
 
 import com.zcj.common.Database;
 import com.zcj.common.Datalake;
 import com.zcj.common.GutenbergBook;
+import com.zcj.common.Tokenizer;
 import org.openjdk.jmh.annotations.*;
 
 import java.nio.charset.StandardCharsets;
@@ -14,10 +16,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Measures the complete indexing operation for the five Gutenberg sample books.
+ * JMH benchmarks for the main indexing operations.
  *
- * Dataset preparation and database creation are excluded from the measurements.
- * Each benchmark invocation reindexes all five books using the real BookIndexer.
+ * Dataset preparation and database creation are excluded
+ * from the measured operations.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -31,9 +33,14 @@ public class BookIndexerBenchmark {
     private static final List<Integer> BOOK_IDS =
             List.of(11, 84, 98, 1342, 1661);
 
+    private static final int BENCHMARK_BOOK_ID = 1342;
+
     private Path temporaryDirectory;
     private Datalake datalake;
     private Connection connection;
+
+    private String benchmarkHeader;
+    private String benchmarkBody;
 
     @Setup(Level.Trial)
     public void setUp() throws Exception {
@@ -49,6 +56,14 @@ public class BookIndexerBenchmark {
 
         prepareDataset(sampleDirectory);
 
+        benchmarkHeader = Files.readString(
+                datalake.headerPath(BENCHMARK_BOOK_ID),
+                StandardCharsets.UTF_8);
+
+        benchmarkBody = Files.readString(
+                datalake.bodyPath(BENCHMARK_BOOK_ID),
+                StandardCharsets.UTF_8);
+
         Path databasePath = temporaryDirectory.resolve("benchmark.db");
         connection = Database.open(databasePath.toString());
         Database.createSchema(connection);
@@ -63,11 +78,12 @@ public class BookIndexerBenchmark {
                         "Sample book not found: " + source);
             }
 
-            String rawText = Files.readString(source, StandardCharsets.UTF_8);
+            String rawText = Files.readString(
+                    source, StandardCharsets.UTF_8);
+
             GutenbergBook.Parts parts = GutenbergBook.split(rawText);
 
-            Path rangeDirectory = datalake.rangeDir(bookId);
-            Files.createDirectories(rangeDirectory);
+            Files.createDirectories(datalake.rangeDir(bookId));
 
             Files.writeString(
                     datalake.headerPath(bookId),
@@ -81,6 +97,35 @@ public class BookIndexerBenchmark {
         }
     }
 
+    /**
+     * Measures tokenization independently.
+     */
+    @Benchmark
+    public List<String> tokenizeBookBody() {
+        return Tokenizer.tokenize(benchmarkBody);
+    }
+
+    /**
+     * Measures metadata extraction independently.
+     */
+    @Benchmark
+    public GutenbergBook.Metadata extractBookMetadata() {
+        return GutenbergBook.parseHeader(benchmarkHeader);
+    }
+
+    /**
+     * Measures the transactional update of one book in SQLite.
+     * Repeated invocations reindex the same book, exercising idempotency.
+     */
+    @Benchmark
+    public BookIndexer.IndexResult updateOneBookIndex() throws Exception {
+        return BookIndexer.indexBook(
+                connection, datalake, BENCHMARK_BOOK_ID);
+    }
+
+    /**
+     * Measures complete indexing of the five sample books.
+     */
     @Benchmark
     public int indexFiveSampleBooks() throws Exception {
         int totalTokens = 0;
@@ -101,7 +146,8 @@ public class BookIndexerBenchmark {
             connection.close();
         }
 
-        if (temporaryDirectory != null && Files.exists(temporaryDirectory)) {
+        if (temporaryDirectory != null &&
+                Files.exists(temporaryDirectory)) {
             try (var paths = Files.walk(temporaryDirectory)) {
                 paths.sorted(Comparator.reverseOrder())
                         .forEach(path -> {

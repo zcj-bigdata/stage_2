@@ -10,6 +10,10 @@ import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -98,6 +102,89 @@ class BookIndexerTest {
             assertEquals(0, count(conn, "SELECT COUNT(*) FROM postings"));
         }
     }
+
+
+@Test
+void shouldHandleConcurrentReindexingWithoutDuplicates() throws Exception {
+    Datalake datalake = createDatalake();
+    Path databasePath = tempDir.resolve("concurrent.db");
+
+    try (Connection setup = Database.open(databasePath.toString())) {
+        Database.createSchema(setup);
+    }
+
+    ExecutorService executor = Executors.newFixedThreadPool(2);
+    CountDownLatch start = new CountDownLatch(1);
+
+    try {
+        var first = executor.submit(() -> {
+            try (Connection conn = Database.open(databasePath.toString())) {
+                start.await();
+                return BookIndexer.indexBook(conn, datalake, 1342);
+            }
+        });
+
+        var second = executor.submit(() -> {
+            try (Connection conn = Database.open(databasePath.toString())) {
+                start.await();
+                return BookIndexer.indexBook(conn, datalake, 1342);
+            }
+        });
+
+        start.countDown();
+
+        assertEquals(1342, first.get(15, TimeUnit.SECONDS).bookId());
+        assertEquals(1342, second.get(15, TimeUnit.SECONDS).bookId());
+
+    } finally {
+        executor.shutdownNow();
+    }
+
+    try (Connection conn = Database.open(databasePath.toString())) {
+        assertEquals(1, count(conn, "SELECT COUNT(*) FROM books"));
+        assertEquals(4, count(conn, "SELECT COUNT(*) FROM postings"));
+        assertEquals("0,4", getPositions(conn, "the", 1342));
+    }
+}
+
+@Test
+void shouldRollbackEntireIndexUpdateWhenPostingInsertionFails()
+        throws Exception {
+
+    Datalake datalake = createDatalake();
+
+    try (Connection conn = Database.open(tempDir.resolve("rollback.db").toString())) {
+        Database.createSchema(conn);
+
+        // First create a valid, committed index.
+        BookIndexer.indexBook(conn, datalake, 1342);
+
+        // Force a failure when the new postings are inserted.
+        try (var statement = conn.createStatement()) {
+            statement.execute("""
+                    CREATE TRIGGER fail_house_insert
+                    BEFORE INSERT ON postings
+                    WHEN NEW.term = 'house'
+                    BEGIN
+                        SELECT RAISE(ABORT, 'forced test failure');
+                    END;
+                    """);
+        }
+
+        // The failed update must roll back the deletion and all new inserts.
+        assertThrows(
+                java.sql.SQLException.class,
+                () -> BookIndexer.indexBook(conn, datalake, 1342)
+        );
+
+        assertEquals(1, count(conn, "SELECT COUNT(*) FROM books"));
+        assertEquals(4, count(conn, "SELECT COUNT(*) FROM postings"));
+
+        assertEquals("0,4", getPositions(conn, "the", 1342));
+        assertEquals("1,5", getPositions(conn, "house", 1342));
+    }
+}
+
 
     private Datalake createDatalake() throws Exception {
         Datalake datalake = new Datalake(tempDir.resolve("datalake"));
