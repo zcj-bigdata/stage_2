@@ -1,0 +1,15 @@
+Preparing a datamart with 200 books ...
+Datamart: C:\Users\alvar\AppData\Local\Temp\stage2-search-jmh-200\search.db
+Host: Windows 11 10.0, 22 logical CPUs, 16,5 GB RAM, Java 21.0.5
+Clients [1, 2, 4, 8, 16, 32, 64], server threads [200], 5 runs of 10 s after 5 s of warm-up, 200 books, reuse connections false
+Started 2026-11-04T19:37:45.341890800
+
+Search Service started (pid 22164, SEARCH_THREADS=200, heap 1g)
+threads=200  clients=1        22.3 ±    3.3 req/s   mean   45.84 ms   p95  157.82 ±  31.77 ms   cpu   4.6%   rss  137.7 MB   errors 0
+threads=200  clients=2        39.7 ±    1.4 req/s   mean   50.34 ms   p95  171.85 ±   7.36 ms   cpu   8.7%   rss  196.1 MB   errors 0
+threads=200  clients=4        53.1 ±    0.3 req/s   mean   74.93 ms   p95  250.00 ±   6.30 ms   cpu  16.9%   rss  352.5 MB   errors 0
+threads=200  clients=8        57.5 ±    0.9 req/s   mean  138.03 ms   p95  451.32 ±   8.71 ms   cpu  31.6%   rss  549.9 MB   errors 0
+threads=200  clients=16       50.5 ±    0.7 req/s   mean  310.56 ms   p95 1128.31 ±  42.20 ms   cpu  50.7%   rss  709.3 MB   errors 0
+threads=200  clients=32       43.7 ±    0.7 req/s   mean  708.09 ms   p95 2581.00 ± 123.01 ms   cpu  68.7%   rss  723.9 MB   errors 0
+threads=200  clients=64       40.8 ±    0.9 req/s   mean 1472.10 ms   p95 4788.55 ± 128.67 ms   cpu  75.3%   rss  731.8 MB   errors 0
+Results written to C:\Users\alvar\OneDrive\Escritorio\stage_2\benchmarks\results

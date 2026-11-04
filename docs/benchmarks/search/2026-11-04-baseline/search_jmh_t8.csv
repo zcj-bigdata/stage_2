@@ -1,0 +1,8 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: books"
+"com.zcj.search.benchmark.SearchJmhBenchmark.parseQuery","avgt",8,20,0.001246,0.000227,"ms/op",200
+"com.zcj.search.benchmark.SearchJmhBenchmark.searchFrequentWord","avgt",8,20,232.232461,16.742254,"ms/op",200
+"com.zcj.search.benchmark.SearchJmhBenchmark.searchNoMatches","avgt",8,20,0.130918,0.009242,"ms/op",200
+"com.zcj.search.benchmark.SearchJmhBenchmark.searchRareWord","avgt",8,20,3.472867,0.256094,"ms/op",200
+"com.zcj.search.benchmark.SearchJmhBenchmark.searchSixWords","avgt",8,20,474.011796,50.340968,"ms/op",200
+"com.zcj.search.benchmark.SearchJmhBenchmark.searchTwoWords","avgt",8,20,1.664381,0.209108,"ms/op",200
+"com.zcj.search.benchmark.SearchJmhBenchmark.searchWithFilters","avgt",8,20,89.110335,10.801073,"ms/op",200

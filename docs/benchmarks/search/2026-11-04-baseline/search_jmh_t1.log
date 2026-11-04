@@ -1,0 +1,414 @@
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.search.benchmark.SearchJmhBenchmark.parseQuery
+# Parameters: (books = 200)
+
+# Run progress: 0,00% complete, ETA 00:03:30
+# Fork: 1 of 2
+# Warmup Iteration   1: 0,001 ms/op
+# Warmup Iteration   2: ≈ 10⁻³ ms/op
+# Warmup Iteration   3: ≈ 10⁻³ ms/op
+# Warmup Iteration   4: ≈ 10⁻³ ms/op
+# Warmup Iteration   5: ≈ 10⁻³ ms/op
+Iteration   1: ≈ 10⁻³ ms/op
+Iteration   2: ≈ 10⁻³ ms/op
+Iteration   3: ≈ 10⁻³ ms/op
+Iteration   4: ≈ 10⁻³ ms/op
+Iteration   5: ≈ 10⁻³ ms/op
+Iteration   6: ≈ 10⁻³ ms/op
+Iteration   7: ≈ 10⁻³ ms/op
+Iteration   8: ≈ 10⁻³ ms/op
+Iteration   9: ≈ 10⁻³ ms/op
+Iteration  10: ≈ 10⁻³ ms/op
+
+# Run progress: 7,14% complete, ETA 00:03:23
+# Fork: 2 of 2
+# Warmup Iteration   1: 0,001 ms/op
+# Warmup Iteration   2: ≈ 10⁻³ ms/op
+# Warmup Iteration   3: ≈ 10⁻³ ms/op
+# Warmup Iteration   4: ≈ 10⁻³ ms/op
+# Warmup Iteration   5: ≈ 10⁻³ ms/op
+Iteration   1: ≈ 10⁻³ ms/op
+Iteration   2: ≈ 10⁻³ ms/op
+Iteration   3: ≈ 10⁻³ ms/op
+Iteration   4: ≈ 10⁻³ ms/op
+Iteration   5: ≈ 10⁻³ ms/op
+Iteration   6: ≈ 10⁻³ ms/op
+Iteration   7: ≈ 10⁻³ ms/op
+Iteration   8: ≈ 10⁻³ ms/op
+Iteration   9: ≈ 10⁻³ ms/op
+Iteration  10: ≈ 10⁻³ ms/op
+
+
+Result "com.zcj.search.benchmark.SearchJmhBenchmark.parseQuery":
+  ≈ 10⁻³ ms/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.search.benchmark.SearchJmhBenchmark.searchFrequentWord
+# Parameters: (books = 200)
+
+# Run progress: 14,29% complete, ETA 00:03:07
+# Fork: 1 of 2
+# Warmup Iteration   1: 116,531 ms/op
+# Warmup Iteration   2: 68,185 ms/op
+# Warmup Iteration   3: 65,466 ms/op
+# Warmup Iteration   4: 63,466 ms/op
+# Warmup Iteration   5: 68,517 ms/op
+Iteration   1: 67,316 ms/op
+Iteration   2: 63,769 ms/op
+Iteration   3: 65,304 ms/op
+Iteration   4: 64,377 ms/op
+Iteration   5: 63,099 ms/op
+Iteration   6: 66,944 ms/op
+Iteration   7: 65,370 ms/op
+Iteration   8: 65,140 ms/op
+Iteration   9: 66,824 ms/op
+Iteration  10: 67,353 ms/op
+
+# Run progress: 21,43% complete, ETA 00:02:53
+# Fork: 2 of 2
+# Warmup Iteration   1: 94,842 ms/op
+# Warmup Iteration   2: 68,599 ms/op
+# Warmup Iteration   3: 63,530 ms/op
+# Warmup Iteration   4: 65,714 ms/op
+# Warmup Iteration   5: 67,189 ms/op
+Iteration   1: 66,109 ms/op
+Iteration   2: 66,512 ms/op
+Iteration   3: 66,304 ms/op
+Iteration   4: 65,875 ms/op
+Iteration   5: 68,505 ms/op
+Iteration   6: 65,369 ms/op
+Iteration   7: 64,522 ms/op
+Iteration   8: 65,811 ms/op
+Iteration   9: 66,092 ms/op
+Iteration  10: 66,549 ms/op
+
+
+Result "com.zcj.search.benchmark.SearchJmhBenchmark.searchFrequentWord":
+  65,857 ±(99.9%) 1,126 ms/op [Average]
+  (min, avg, max) = (63,099, 65,857, 68,505), stdev = 1,297
+  CI (99.9%): [64,731, 66,983] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.search.benchmark.SearchJmhBenchmark.searchNoMatches
+# Parameters: (books = 200)
+
+# Run progress: 28,57% complete, ETA 00:02:38
+# Fork: 1 of 2
+# Warmup Iteration   1: 0,086 ms/op
+# Warmup Iteration   2: 0,058 ms/op
+# Warmup Iteration   3: 0,054 ms/op
+# Warmup Iteration   4: 0,059 ms/op
+# Warmup Iteration   5: 0,069 ms/op
+Iteration   1: 0,051 ms/op
+Iteration   2: 0,045 ms/op
+Iteration   3: 0,044 ms/op
+Iteration   4: 0,046 ms/op
+Iteration   5: 0,046 ms/op
+Iteration   6: 0,048 ms/op
+Iteration   7: 0,051 ms/op
+Iteration   8: 0,055 ms/op
+Iteration   9: 0,045 ms/op
+Iteration  10: 0,044 ms/op
+
+# Run progress: 35,71% complete, ETA 00:02:22
+# Fork: 2 of 2
+# Warmup Iteration   1: 0,089 ms/op
+# Warmup Iteration   2: 0,047 ms/op
+# Warmup Iteration   3: 0,044 ms/op
+# Warmup Iteration   4: 0,043 ms/op
+# Warmup Iteration   5: 0,042 ms/op
+Iteration   1: 0,044 ms/op
+Iteration   2: 0,044 ms/op
+Iteration   3: 0,043 ms/op
+Iteration   4: 0,044 ms/op
+Iteration   5: 0,043 ms/op
+Iteration   6: 0,046 ms/op
+Iteration   7: 0,046 ms/op
+Iteration   8: 0,044 ms/op
+Iteration   9: 0,044 ms/op
+Iteration  10: 0,045 ms/op
+
+
+Result "com.zcj.search.benchmark.SearchJmhBenchmark.searchNoMatches":
+  0,046 ±(99.9%) 0,003 ms/op [Average]
+  (min, avg, max) = (0,043, 0,046, 0,055), stdev = 0,003
+  CI (99.9%): [0,043, 0,049] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.search.benchmark.SearchJmhBenchmark.searchRareWord
+# Parameters: (books = 200)
+
+# Run progress: 42,86% complete, ETA 00:02:05
+# Fork: 1 of 2
+# Warmup Iteration   1: 1,693 ms/op
+# Warmup Iteration   2: 1,178 ms/op
+# Warmup Iteration   3: 1,096 ms/op
+# Warmup Iteration   4: 1,048 ms/op
+# Warmup Iteration   5: 1,142 ms/op
+Iteration   1: 1,125 ms/op
+Iteration   2: 1,048 ms/op
+Iteration   3: 1,329 ms/op
+Iteration   4: 1,134 ms/op
+Iteration   5: 1,078 ms/op
+Iteration   6: 1,209 ms/op
+Iteration   7: 1,134 ms/op
+Iteration   8: 1,160 ms/op
+Iteration   9: 1,300 ms/op
+Iteration  10: 1,090 ms/op
+
+# Run progress: 50,00% complete, ETA 00:01:50
+# Fork: 2 of 2
+# Warmup Iteration   1: 1,728 ms/op
+# Warmup Iteration   2: 1,191 ms/op
+# Warmup Iteration   3: 1,075 ms/op
+# Warmup Iteration   4: 1,065 ms/op
+# Warmup Iteration   5: 1,106 ms/op
+Iteration   1: 1,061 ms/op
+Iteration   2: 1,067 ms/op
+Iteration   3: 1,059 ms/op
+Iteration   4: 1,042 ms/op
+Iteration   5: 1,250 ms/op
+Iteration   6: 1,210 ms/op
+Iteration   7: 1,061 ms/op
+Iteration   8: 1,057 ms/op
+Iteration   9: 1,073 ms/op
+Iteration  10: 1,043 ms/op
+
+
+Result "com.zcj.search.benchmark.SearchJmhBenchmark.searchRareWord":
+  1,127 ±(99.9%) 0,077 ms/op [Average]
+  (min, avg, max) = (1,042, 1,127, 1,329), stdev = 0,089
+  CI (99.9%): [1,050, 1,204] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.search.benchmark.SearchJmhBenchmark.searchSixWords
+# Parameters: (books = 200)
+
+# Run progress: 57,14% complete, ETA 00:01:34
+# Fork: 1 of 2
+# Warmup Iteration   1: 271,302 ms/op
+# Warmup Iteration   2: 140,566 ms/op
+# Warmup Iteration   3: 138,770 ms/op
+# Warmup Iteration   4: 139,738 ms/op
+# Warmup Iteration   5: 138,881 ms/op
+Iteration   1: 136,788 ms/op
+Iteration   2: 139,769 ms/op
+Iteration   3: 132,741 ms/op
+Iteration   4: 139,359 ms/op
+Iteration   5: 147,212 ms/op
+Iteration   6: 140,880 ms/op
+Iteration   7: 162,682 ms/op
+Iteration   8: 153,190 ms/op
+Iteration   9: 141,290 ms/op
+Iteration  10: 142,220 ms/op
+
+# Run progress: 64,29% complete, ETA 00:01:19
+# Fork: 2 of 2
+# Warmup Iteration   1: 183,106 ms/op
+# Warmup Iteration   2: 142,841 ms/op
+# Warmup Iteration   3: 140,511 ms/op
+# Warmup Iteration   4: 138,809 ms/op
+# Warmup Iteration   5: 147,016 ms/op
+Iteration   1: 139,772 ms/op
+Iteration   2: 144,234 ms/op
+Iteration   3: 149,241 ms/op
+Iteration   4: 137,791 ms/op
+Iteration   5: 143,465 ms/op
+Iteration   6: 142,029 ms/op
+Iteration   7: 136,928 ms/op
+Iteration   8: 142,778 ms/op
+Iteration   9: 144,129 ms/op
+Iteration  10: 142,218 ms/op
+
+
+Result "com.zcj.search.benchmark.SearchJmhBenchmark.searchSixWords":
+  142,936 ±(99.9%) 5,643 ms/op [Average]
+  (min, avg, max) = (132,741, 142,936, 162,682), stdev = 6,499
+  CI (99.9%): [137,293, 148,579] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.search.benchmark.SearchJmhBenchmark.searchTwoWords
+# Parameters: (books = 200)
+
+# Run progress: 71,43% complete, ETA 00:01:03
+# Fork: 1 of 2
+# Warmup Iteration   1: 1,398 ms/op
+# Warmup Iteration   2: 0,829 ms/op
+# Warmup Iteration   3: 0,817 ms/op
+# Warmup Iteration   4: 0,818 ms/op
+# Warmup Iteration   5: 0,778 ms/op
+Iteration   1: 0,835 ms/op
+Iteration   2: 0,788 ms/op
+Iteration   3: 0,760 ms/op
+Iteration   4: 0,801 ms/op
+Iteration   5: 0,790 ms/op
+Iteration   6: 0,758 ms/op
+Iteration   7: 0,899 ms/op
+Iteration   8: 0,810 ms/op
+Iteration   9: 0,771 ms/op
+Iteration  10: 0,852 ms/op
+
+# Run progress: 78,57% complete, ETA 00:00:47
+# Fork: 2 of 2
+# Warmup Iteration   1: 1,407 ms/op
+# Warmup Iteration   2: 0,844 ms/op
+# Warmup Iteration   3: 0,804 ms/op
+# Warmup Iteration   4: 0,758 ms/op
+# Warmup Iteration   5: 0,833 ms/op
+Iteration   1: 0,808 ms/op
+Iteration   2: 0,758 ms/op
+Iteration   3: 0,778 ms/op
+Iteration   4: 0,787 ms/op
+Iteration   5: 0,775 ms/op
+Iteration   6: 0,776 ms/op
+Iteration   7: 0,789 ms/op
+Iteration   8: 0,772 ms/op
+Iteration   9: 0,757 ms/op
+Iteration  10: 0,795 ms/op
+
+
+Result "com.zcj.search.benchmark.SearchJmhBenchmark.searchTwoWords":
+  0,793 ±(99.9%) 0,031 ms/op [Average]
+  (min, avg, max) = (0,757, 0,793, 0,899), stdev = 0,035
+  CI (99.9%): [0,762, 0,824] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.search.benchmark.SearchJmhBenchmark.searchWithFilters
+# Parameters: (books = 200)
+
+# Run progress: 85,71% complete, ETA 00:00:31
+# Fork: 1 of 2
+# Warmup Iteration   1: 24,700 ms/op
+# Warmup Iteration   2: 18,852 ms/op
+# Warmup Iteration   3: 18,739 ms/op
+# Warmup Iteration   4: 18,945 ms/op
+# Warmup Iteration   5: 19,170 ms/op
+Iteration   1: 18,762 ms/op
+Iteration   2: 17,852 ms/op
+Iteration   3: 18,418 ms/op
+Iteration   4: 18,013 ms/op
+Iteration   5: 18,007 ms/op
+Iteration   6: 18,645 ms/op
+Iteration   7: 17,993 ms/op
+Iteration   8: 17,670 ms/op
+Iteration   9: 18,531 ms/op
+Iteration  10: 19,823 ms/op
+
+# Run progress: 92,86% complete, ETA 00:00:15
+# Fork: 2 of 2
+# Warmup Iteration   1: 35,545 ms/op
+# Warmup Iteration   2: 26,846 ms/op
+# Warmup Iteration   3: 22,189 ms/op
+# Warmup Iteration   4: 21,485 ms/op
+# Warmup Iteration   5: 20,623 ms/op
+Iteration   1: 19,405 ms/op
+Iteration   2: 19,397 ms/op
+Iteration   3: 19,338 ms/op
+Iteration   4: 18,671 ms/op
+Iteration   5: 20,911 ms/op
+Iteration   6: 19,850 ms/op
+Iteration   7: 19,185 ms/op
+Iteration   8: 21,454 ms/op
+Iteration   9: 20,175 ms/op
+Iteration  10: 18,243 ms/op
+
+
+Result "com.zcj.search.benchmark.SearchJmhBenchmark.searchWithFilters":
+  19,017 ±(99.9%) 0,900 ms/op [Average]
+  (min, avg, max) = (17,670, 19,017, 21,454), stdev = 1,036
+  CI (99.9%): [18,117, 19,917] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:03:41
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                              (books)  Mode  Cnt    Score    Error  Units
+SearchJmhBenchmark.parseQuery              200  avgt   20   ≈ 10⁻³           ms/op
+SearchJmhBenchmark.searchFrequentWord      200  avgt   20   65,857 ±  1,126  ms/op
+SearchJmhBenchmark.searchNoMatches         200  avgt   20    0,046 ±  0,003  ms/op
+SearchJmhBenchmark.searchRareWord          200  avgt   20    1,127 ±  0,077  ms/op
+SearchJmhBenchmark.searchSixWords          200  avgt   20  142,936 ±  5,643  ms/op
+SearchJmhBenchmark.searchTwoWords          200  avgt   20    0,793 ±  0,031  ms/op
+SearchJmhBenchmark.searchWithFilters       200  avgt   20   19,017 ±  0,900  ms/op
+
+Benchmark result is saved to benchmarks/results/search_jmh_t1.csv
