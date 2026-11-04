@@ -1,6 +1,5 @@
 package com.zcj.search.benchmark;
 
-import com.zcj.search.SampleDataSeeder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -74,7 +73,6 @@ public class SearchLoadBenchmark {
     private int port = 7103;
     private String heap = "1g";
     private Path jar = firstExisting("search-service/target/search-service-1.0.0.jar", "target/search-service-1.0.0.jar");
-    private Path sampleData = firstExisting("sample_data", "../sample_data");
     private Path results = Path.of("benchmarks", "results");
 
     private final HttpClient client = HttpClient.newBuilder()
@@ -101,7 +99,6 @@ public class SearchLoadBenchmark {
                 case "--port" -> port = Integer.parseInt(value);
                 case "--heap" -> heap = value;
                 case "--jar" -> jar = Path.of(value);
-                case "--sample" -> sampleData = Path.of(value);
                 case "--results" -> results = Path.of(value);
                 default -> throw new IllegalArgumentException("Unknown option " + args[i]);
             }
@@ -115,9 +112,10 @@ public class SearchLoadBenchmark {
             throw new IllegalStateException("Service jar not found: " + jar.toAbsolutePath() + " (run ./mvnw package first)");
         }
         Files.createDirectories(results);
-        Path db = Files.createTempDirectory("search-load").resolve("search.db");
-        System.out.printf("Seeding %d books into %s ...%n", books, db);
-        SampleDataSeeder.seedSynthetic(sampleData, db.toString(), books);
+        // Same cached datamart as the JMH benchmark: built once, reused by every run
+        System.out.printf("Preparing a datamart with %d books ...%n", books);
+        Path db = SearchJmhBenchmark.datamart(books);
+        System.out.println("Datamart: " + db);
 
         printHost();
 

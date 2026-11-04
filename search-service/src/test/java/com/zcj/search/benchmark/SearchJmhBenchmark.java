@@ -14,7 +14,6 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 import java.nio.file.Files;
@@ -28,8 +27,9 @@ import java.util.concurrent.TimeUnit;
  * JMH microbenchmarks of the Search Service internals, without HTTP:
  * query parsing and the datamart query for different kinds of searches.
  *
- * <p>The datamart is built once per trial with {@code books} books (the sample books
- * repeated with synthetic ids) and is not part of the measurement. The repository is
+ * <p>The datamart has {@code books} books (the sample books repeated with synthetic ids).
+ * It is built once, cached in the temporary folder and reused by every fork; building it
+ * is not part of the measurement. The repository is
  * shared by every benchmark thread, as in the service: each thread keeps its own SQLite
  * connection, so running with {@code -t 1}, {@code -t 4} or {@code -t 8} measures how
  * concurrent searches scale inside one process.</p>
@@ -52,7 +52,6 @@ public class SearchJmhBenchmark {
     @Param({"200"})
     public int books;
 
-    private Path directory;
     private SearchRepository repository;
 
     private SearchQuery rareWord;
@@ -64,11 +63,7 @@ public class SearchJmhBenchmark {
 
     @Setup(Level.Trial)
     public void setUp() throws Exception {
-        Path sampleData = Files.isDirectory(Path.of("sample_data")) ? Path.of("sample_data") : Path.of("..", "sample_data");
-        directory = Files.createTempDirectory("search-jmh");
-        String db = directory.resolve("search.db").toString();
-        SampleDataSeeder.seedSynthetic(sampleData, db, books);
-        repository = new SearchRepository(db, true);
+        repository = new SearchRepository(datamart(books).toString(), true);
 
         rareWord = query("q", "darcy");
         frequentWord = query("q", "the");
@@ -78,11 +73,27 @@ public class SearchJmhBenchmark {
         noMatches = query("q", "zzzzqx");
     }
 
-    @TearDown(Level.Trial)
-    public void tearDown() throws Exception {
-        try (var paths = Files.walk(directory)) {
-            paths.sorted(Comparator.reverseOrder()).forEach(p -> p.toFile().delete());
+    /**
+     * Datamart with {@code books} books, built only once and reused by every fork and
+     * benchmark (building it takes minutes and is not part of the measurement). A marker
+     * file is written last, so a datamart left half-built by an interrupted run is rebuilt.
+     */
+    static Path datamart(int books) throws Exception {
+        Path dir = Path.of(System.getProperty("java.io.tmpdir"), "stage2-search-jmh-" + books);
+        Path db = dir.resolve("search.db");
+        Path complete = dir.resolve("complete");
+        if (!Files.exists(complete)) {
+            if (Files.exists(dir)) {
+                try (var paths = Files.walk(dir)) {
+                    paths.sorted(Comparator.reverseOrder()).forEach(p -> p.toFile().delete());
+                }
+            }
+            Files.createDirectories(dir);
+            Path sampleData = Files.isDirectory(Path.of("sample_data")) ? Path.of("sample_data") : Path.of("..", "sample_data");
+            SampleDataSeeder.seedSynthetic(sampleData, db.toString(), books);
+            Files.createFile(complete);
         }
+        return db;
     }
 
     private static SearchQuery query(String... keyValues) {
