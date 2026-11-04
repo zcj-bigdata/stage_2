@@ -40,7 +40,7 @@ import java.util.concurrent.atomic.AtomicLong;
  *
  * <p>Run from the repository root, after {@code ./mvnw package}:</p>
  * <pre>
- *   ./mvnw -q -pl search-service -am test-compile exec:java -Dexec.args="--books 200 --reps 5"
+ *   ./mvnw -q -pl search-service -am test-compile exec:exec -Dbenchmark.args="--books 200 --reps 5"
  * </pre>
  * <p>Results: {@code benchmarks/results/search_load_runs_<reuse|no_reuse>.csv} (one row per
  * run) and {@code search_load_summary_<reuse|no_reuse>.csv} (mean and std per configuration).

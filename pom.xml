@@ -108,6 +108,7 @@
                     <configuration>
                         <skip>true</skip>
                         <mainClass>none</mainClass>
+                        <executable>java</executable>
                     </configuration>
                 </plugin>
                 <!-- Builds an executable jar that includes all the dependencies -->
