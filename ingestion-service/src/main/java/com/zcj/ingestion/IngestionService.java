@@ -195,6 +195,7 @@ public class IngestionService {
                     // A line cut by a crash in the middle of an append
                 }
             }
+            terminateLastLine(registry);
         }
         available.addAll(recorded);
 
@@ -253,6 +254,25 @@ public class IngestionService {
             }
         } finally {
             Files.deleteIfExists(tmp);
+        }
+    }
+
+    /**
+     * If a crash cut the last append ("13" instead of "1342\n"), ends that line so the
+     * next append does not glue a new id to it ("1384").
+     */
+    static void terminateLastLine(Path file) throws IOException {
+        long size = Files.size(file);
+        if (size == 0) {
+            return;
+        }
+        try (FileChannel channel = FileChannel.open(file, StandardOpenOption.READ, StandardOpenOption.WRITE)) {
+            ByteBuffer last = ByteBuffer.allocate(1);
+            channel.read(last, size - 1);
+            if (last.get(0) != '\n') {
+                channel.write(ByteBuffer.wrap(new byte[]{'\n'}), size);
+                channel.force(true);
+            }
         }
     }
 

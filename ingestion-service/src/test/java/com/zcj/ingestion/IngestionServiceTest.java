@@ -130,6 +130,18 @@ class IngestionServiceTest {
     }
 
     @Test
+    void lineCutByACrashIsNotGluedToTheNextId() throws Exception {
+        Datalake datalake = newDatalake();
+        Files.createDirectories(datalake.root());
+        Path registry = datalake.root().resolve(IngestionService.REGISTRY_FILE);
+        Files.writeString(registry, "13");   // "1342\n" cut by a crash
+
+        new IngestionService(datalake, new SampleDataSource(SAMPLE_DATA)).ingest(84);
+
+        assertEquals(List.of("13", "84"), Files.readAllLines(registry));
+    }
+
+    @Test
     void bookWithOnlyTheBodyIsNotAvailable() throws Exception {
         Datalake datalake = newDatalake();
         Files.createDirectories(datalake.rangeDir(5));
