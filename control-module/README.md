@@ -37,7 +37,7 @@ Operational endpoints (consumer: operators):
 |--------|-------|----------|
 | GET | `/status` | Health check |
 | GET | `/control/status` | `{"downloaded", "indexed", "failed", "pending"}` |
-| GET | `/control/metrics` | Coordination cost since start-up: `books_indexed`, `books_per_second`, `avg_ingest_ms`, `avg_index_ms`, `avg_book_ms`, `retries`, `backoff_wait_ms`, `running`, `workers` |
+| GET | `/control/metrics` | Coordination cost since start-up: `books_indexed`, `books_per_second` (over `active_s`, the time spent working), `avg_ingest_ms`, `avg_index_ms`, `avg_book_ms`, `retries`, `backoff_wait_ms`, `running`, `workers` |
 
 Examples in [`docs/api/examples/control.http`](../docs/api/examples/control.http).
 

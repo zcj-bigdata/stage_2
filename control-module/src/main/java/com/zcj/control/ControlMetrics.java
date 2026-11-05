@@ -21,13 +21,18 @@ public class ControlMetrics {
     private long booksIndexed;
     private long booksFailed;
     private long bookNanos;
+    /** Start of the first service call and end of the last indexed book (0 = none yet). */
+    private long firstCallAt;
+    private long lastIndexedAt;
 
     public synchronized void ingestCall(long nanos) {
+        workStarted(nanos);
         ingestCalls++;
         ingestNanos += nanos;
     }
 
     public synchronized void indexCall(long nanos) {
+        workStarted(nanos);
         indexCalls++;
         indexNanos += nanos;
     }
@@ -41,6 +46,14 @@ public class ControlMetrics {
     public synchronized void bookIndexed(long nanos) {
         booksIndexed++;
         bookNanos += nanos;
+        lastIndexedAt = System.nanoTime();
+    }
+
+    /** Remembers when the first call of the run started (it ended now, after {@code nanos}). */
+    private void workStarted(long nanos) {
+        if (firstCallAt == 0) {
+            firstCallAt = System.nanoTime() - nanos;
+        }
     }
 
     public synchronized void bookFailed() {
@@ -53,7 +66,12 @@ public class ControlMetrics {
         m.put("uptime_s", round(elapsedSeconds));
         m.put("books_indexed", booksIndexed);
         m.put("books_failed", booksFailed);
-        m.put("books_per_second", round(elapsedSeconds > 0 ? booksIndexed / elapsedSeconds : 0));
+        // Throughput over the time spent working (first call -> last indexed book), not over
+        // the uptime: the process may stay idle for a long time after the last book.
+        double activeSeconds = lastIndexedAt > firstCallAt && firstCallAt != 0
+                ? (lastIndexedAt - firstCallAt) / 1e9 : 0;
+        m.put("active_s", round(activeSeconds));
+        m.put("books_per_second", round(activeSeconds > 0 ? booksIndexed / activeSeconds : 0));
         m.put("ingest_calls", ingestCalls);
         m.put("avg_ingest_ms", averageMillis(ingestNanos, ingestCalls));
         m.put("index_calls", indexCalls);
