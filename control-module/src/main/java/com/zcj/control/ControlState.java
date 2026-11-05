@@ -48,6 +48,9 @@ public class ControlState {
     private final Set<Integer> downloaded = new LinkedHashSet<>();
     private final Set<Integer> indexed = new HashSet<>();
     private final Map<Integer, String> failed = new LinkedHashMap<>();
+    /** Downloaded, not indexed and not failed, in download order. Kept apart so that
+     *  finding the next pending book does not depend on the number of processed books. */
+    private final Set<Integer> pending = new LinkedHashSet<>();
     private final Set<Integer> inProgress = new HashSet<>();
 
     public ControlState(Path folder) throws IOException {
@@ -77,8 +80,8 @@ public class ControlState {
      * or returns null if there is none.
      */
     public synchronized Integer claimPending() {
-        for (int bookId : downloaded) {
-            if (!indexed.contains(bookId) && !failed.containsKey(bookId) && !inProgress.contains(bookId)) {
+        for (int bookId : pending) {
+            if (!inProgress.contains(bookId)) {
                 inProgress.add(bookId);
                 return bookId;
             }
@@ -107,6 +110,9 @@ public class ControlState {
     public synchronized void markDownloaded(int bookId) throws IOException {
         if (downloaded.add(bookId)) {
             appendLine(downloadedFile, String.valueOf(bookId));
+            if (!indexed.contains(bookId) && !failed.containsKey(bookId)) {
+                pending.add(bookId);
+            }
         }
     }
 
@@ -115,6 +121,7 @@ public class ControlState {
         if (indexed.add(bookId)) {
             appendLine(indexedFile, String.valueOf(bookId));
         }
+        pending.remove(bookId);
     }
 
     public synchronized void markFailed(int bookId, String reason) throws IOException {
@@ -123,6 +130,7 @@ public class ControlState {
             failed.put(bookId, clean);
             appendLine(failedFile, bookId + "\t" + clean);
         }
+        pending.remove(bookId);
     }
 
     // ------------------------------------------------------------------ queries
@@ -144,13 +152,7 @@ public class ControlState {
     }
 
     public synchronized Snapshot snapshot() {
-        int pending = 0;
-        for (int bookId : downloaded) {
-            if (!indexed.contains(bookId) && !failed.containsKey(bookId)) {
-                pending++;
-            }
-        }
-        return new Snapshot(downloaded.size(), indexed.size(), failed.size(), pending);
+        return new Snapshot(downloaded.size(), indexed.size(), failed.size(), pending.size());
     }
 
     // ------------------------------------------------------------------ files
@@ -174,6 +176,11 @@ public class ControlState {
             Integer id = parseId(tab < 0 ? line : line.substring(0, tab));
             if (id != null) {
                 failed.put(id, tab < 0 ? "" : line.substring(tab + 1));
+            }
+        }
+        for (int bookId : downloaded) {
+            if (!indexed.contains(bookId) && !failed.containsKey(bookId)) {
+                pending.add(bookId);
             }
         }
     }
