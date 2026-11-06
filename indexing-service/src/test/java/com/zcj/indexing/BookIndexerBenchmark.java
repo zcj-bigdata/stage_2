@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 5, time = 1)
 @Measurement(iterations = 10, time = 1)
 @Fork(2)
-@Threads(1)
+
 @State(Scope.Thread)
 public class BookIndexerBenchmark {
 
