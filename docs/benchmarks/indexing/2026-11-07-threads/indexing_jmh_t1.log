@@ -1,0 +1,241 @@
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Duser.language=en -Duser.country=US
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.indexing.BookIndexerBenchmark.extractBookMetadata
+
+# Run progress: 0.00% complete, ETA 00:02:00
+# Fork: 1 of 2
+# Warmup Iteration   1: 0.012 ms/op
+# Warmup Iteration   2: 0.009 ms/op
+# Warmup Iteration   3: 0.008 ms/op
+# Warmup Iteration   4: 0.010 ms/op
+# Warmup Iteration   5: 0.008 ms/op
+Iteration   1: 0.008 ms/op
+Iteration   2: 0.008 ms/op
+Iteration   3: 0.008 ms/op
+Iteration   4: 0.008 ms/op
+Iteration   5: 0.008 ms/op
+Iteration   6: 0.008 ms/op
+Iteration   7: 0.009 ms/op
+Iteration   8: 0.010 ms/op
+Iteration   9: 0.008 ms/op
+Iteration  10: 0.009 ms/op
+
+# Run progress: 12.50% complete, ETA 00:01:51
+# Fork: 2 of 2
+# Warmup Iteration   1: 0.011 ms/op
+# Warmup Iteration   2: 0.009 ms/op
+# Warmup Iteration   3: 0.008 ms/op
+# Warmup Iteration   4: 0.008 ms/op
+# Warmup Iteration   5: 0.008 ms/op
+Iteration   1: 0.008 ms/op
+Iteration   2: 0.008 ms/op
+Iteration   3: 0.008 ms/op
+Iteration   4: 0.008 ms/op
+Iteration   5: 0.008 ms/op
+Iteration   6: 0.008 ms/op
+Iteration   7: 0.008 ms/op
+Iteration   8: 0.008 ms/op
+Iteration   9: 0.008 ms/op
+Iteration  10: 0.008 ms/op
+
+
+Result "com.zcj.indexing.BookIndexerBenchmark.extractBookMetadata":
+  0.008 ±(99.9%) 0.001 ms/op [Average]
+  (min, avg, max) = (0.008, 0.008, 0.010), stdev = 0.001
+  CI (99.9%): [0.008, 0.009] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Duser.language=en -Duser.country=US
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.indexing.BookIndexerBenchmark.indexFiveSampleBooks
+
+# Run progress: 25.00% complete, ETA 00:01:35
+# Fork: 1 of 2
+# Warmup Iteration   1: 306.383 ms/op
+# Warmup Iteration   2: 273.862 ms/op
+# Warmup Iteration   3: 284.832 ms/op
+# Warmup Iteration   4: 278.034 ms/op
+# Warmup Iteration   5: 284.309 ms/op
+Iteration   1: 273.217 ms/op
+Iteration   2: 284.137 ms/op
+Iteration   3: 281.362 ms/op
+Iteration   4: 279.175 ms/op
+Iteration   5: 278.098 ms/op
+Iteration   6: 278.776 ms/op
+Iteration   7: 289.015 ms/op
+Iteration   8: 335.544 ms/op
+Iteration   9: 345.816 ms/op
+Iteration  10: 332.529 ms/op
+
+# Run progress: 37.50% complete, ETA 00:01:22
+# Fork: 2 of 2
+# Warmup Iteration   1: 349.708 ms/op
+# Warmup Iteration   2: 280.347 ms/op
+# Warmup Iteration   3: 339.271 ms/op
+# Warmup Iteration   4: 336.405 ms/op
+# Warmup Iteration   5: 320.775 ms/op
+Iteration   1: 283.468 ms/op
+Iteration   2: 307.361 ms/op
+Iteration   3: 290.689 ms/op
+Iteration   4: 279.917 ms/op
+Iteration   5: 289.303 ms/op
+Iteration   6: 276.589 ms/op
+Iteration   7: 305.910 ms/op
+Iteration   8: 343.956 ms/op
+Iteration   9: 297.000 ms/op
+Iteration  10: 283.244 ms/op
+
+
+Result "com.zcj.indexing.BookIndexerBenchmark.indexFiveSampleBooks":
+  296.755 ±(99.9%) 20.653 ms/op [Average]
+  (min, avg, max) = (273.217, 296.755, 345.816), stdev = 23.784
+  CI (99.9%): [276.102, 317.408] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Duser.language=en -Duser.country=US
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.indexing.BookIndexerBenchmark.tokenizeBookBody
+
+# Run progress: 50.00% complete, ETA 00:01:07
+# Fork: 1 of 2
+# Warmup Iteration   1: 6.469 ms/op
+# Warmup Iteration   2: 6.353 ms/op
+# Warmup Iteration   3: 5.887 ms/op
+# Warmup Iteration   4: 5.758 ms/op
+# Warmup Iteration   5: 5.790 ms/op
+Iteration   1: 5.878 ms/op
+Iteration   2: 5.677 ms/op
+Iteration   3: 5.876 ms/op
+Iteration   4: 5.702 ms/op
+Iteration   5: 5.865 ms/op
+Iteration   6: 5.935 ms/op
+Iteration   7: 5.830 ms/op
+Iteration   8: 5.899 ms/op
+Iteration   9: 5.728 ms/op
+Iteration  10: 6.023 ms/op
+
+# Run progress: 62.50% complete, ETA 00:00:49
+# Fork: 2 of 2
+# Warmup Iteration   1: 6.740 ms/op
+# Warmup Iteration   2: 6.183 ms/op
+# Warmup Iteration   3: 6.462 ms/op
+# Warmup Iteration   4: 6.670 ms/op
+# Warmup Iteration   5: 7.827 ms/op
+Iteration   1: 9.965 ms/op
+Iteration   2: 8.767 ms/op
+Iteration   3: 8.963 ms/op
+Iteration   4: 8.270 ms/op
+Iteration   5: 8.448 ms/op
+Iteration   6: 11.079 ms/op
+Iteration   7: 9.310 ms/op
+Iteration   8: 8.146 ms/op
+Iteration   9: 9.090 ms/op
+Iteration  10: 7.986 ms/op
+
+
+Result "com.zcj.indexing.BookIndexerBenchmark.tokenizeBookBody":
+  7.422 ±(99.9%) 1.518 ms/op [Average]
+  (min, avg, max) = (5.677, 7.422, 11.079), stdev = 1.748
+  CI (99.9%): [5.904, 8.940] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.5, Java HotSpot(TM) 64-Bit Server VM, 21.0.5+9-LTS-239
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Duser.language=en -Duser.country=US
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.indexing.BookIndexerBenchmark.updateOneBookIndex
+
+# Run progress: 75.00% complete, ETA 00:00:33
+# Fork: 1 of 2
+# Warmup Iteration   1: 48.687 ms/op
+# Warmup Iteration   2: 40.796 ms/op
+# Warmup Iteration   3: 84.824 ms/op
+# Warmup Iteration   4: 126.990 ms/op
+# Warmup Iteration   5: 147.039 ms/op
+Iteration   1: 123.480 ms/op
+Iteration   2: 124.821 ms/op
+Iteration   3: 128.431 ms/op
+Iteration   4: 100.804 ms/op
+Iteration   5: 101.888 ms/op
+Iteration   6: 102.414 ms/op
+Iteration   7: 93.507 ms/op
+Iteration   8: 46.524 ms/op
+Iteration   9: 45.121 ms/op
+Iteration  10: 45.392 ms/op
+
+# Run progress: 87.50% complete, ETA 00:00:16
+# Fork: 2 of 2
+# Warmup Iteration   1: 40.731 ms/op
+# Warmup Iteration   2: 39.437 ms/op
+# Warmup Iteration   3: 42.957 ms/op
+# Warmup Iteration   4: 39.657 ms/op
+# Warmup Iteration   5: 37.279 ms/op
+Iteration   1: 34.077 ms/op
+Iteration   2: 35.549 ms/op
+Iteration   3: 45.253 ms/op
+Iteration   4: 52.490 ms/op
+Iteration   5: 49.607 ms/op
+Iteration   6: 54.381 ms/op
+Iteration   7: 43.131 ms/op
+Iteration   8: 48.999 ms/op
+Iteration   9: 55.464 ms/op
+Iteration  10: 44.333 ms/op
+
+
+Result "com.zcj.indexing.BookIndexerBenchmark.updateOneBookIndex":
+  68.783 ±(99.9%) 28.651 ms/op [Average]
+  (min, avg, max) = (34.077, 68.783, 128.431), stdev = 32.994
+  CI (99.9%): [40.132, 97.434] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:02:11
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                  Mode  Cnt    Score    Error  Units
+BookIndexerBenchmark.extractBookMetadata   avgt   20    0.008 ±  0.001  ms/op
+BookIndexerBenchmark.indexFiveSampleBooks  avgt   20  296.755 ± 20.653  ms/op
+BookIndexerBenchmark.tokenizeBookBody      avgt   20    7.422 ±  1.518  ms/op
+BookIndexerBenchmark.updateOneBookIndex    avgt   20   68.783 ± 28.651  ms/op
+
+Benchmark result is saved to docs/benchmarks/indexing/2026-11-07-threads/indexing_jmh_t1.csv

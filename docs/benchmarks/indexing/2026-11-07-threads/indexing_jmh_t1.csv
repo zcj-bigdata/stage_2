@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.zcj.indexing.BookIndexerBenchmark.extractBookMetadata","avgt",1,20,0.008150,0.000430,"ms/op"
+"com.zcj.indexing.BookIndexerBenchmark.indexFiveSampleBooks","avgt",1,20,296.755305,20.652849,"ms/op"
+"com.zcj.indexing.BookIndexerBenchmark.tokenizeBookBody","avgt",1,20,7.421921,1.518314,"ms/op"
+"com.zcj.indexing.BookIndexerBenchmark.updateOneBookIndex","avgt",1,20,68.783246,28.650820,"ms/op"
