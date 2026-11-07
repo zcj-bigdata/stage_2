@@ -1,6 +1,7 @@
 package com.zcj.common;
 
 import io.javalin.Javalin;
+import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
 import io.javalin.http.HttpResponseException;
 import io.javalin.http.HttpStatus;
@@ -8,6 +9,7 @@ import io.javalin.http.HttpStatus;
 import java.time.Instant;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * Creates the Javalin server of a service with the conventions shared by all of
@@ -20,11 +22,21 @@ public final class Http {
     }
 
     public static Javalin create(String serviceName) {
+        return create(serviceName, config -> {
+        });
+    }
+
+    /**
+     * Same as {@link #create(String)}, with extra service-specific configuration
+     * (thread pool size, CORS...).
+     */
+    public static Javalin create(String serviceName, Consumer<JavalinConfig> extraConfig) {
         Instant startedAt = Instant.now();
 
         Javalin app = Javalin.create(config -> {
             config.http.defaultContentType = "application/json";
             config.showJavalinBanner = false;
+            extraConfig.accept(config);
         });
 
         app.get("/status", ctx -> {

@@ -1,0 +1,33 @@
+Preparing a datamart with 200 books ...
+Datamart: C:\Users\alvar\AppData\Local\Temp\stage2-search-jmh-200\search.db
+Host: Windows 11 10.0, 22 logical CPUs, 16,5 GB RAM, Java 21.0.5
+Clients [1, 2, 4, 8, 16, 32, 64], server threads [8, 32, 200], 5 runs of 10 s after 5 s of warm-up, 200 books, reuse connections true
+Started 2026-11-04T19:16:20.659071
+
+Search Service started (pid 14168, SEARCH_THREADS=8, heap 1g)
+threads=8    clients=1        22.0 ±    5.6 req/s   mean   48.68 ms   p95  163.82 ±  61.17 ms   cpu   4.3%   rss  144.1 MB   errors 0
+threads=8    clients=2        25.5 ±    1.6 req/s   mean   78.53 ms   p95  267.34 ±  10.77 ms   cpu   8.8%   rss  163.6 MB   errors 0
+threads=8    clients=4        38.1 ±    0.9 req/s   mean  104.11 ms   p95  355.18 ±  14.20 ms   cpu  16.9%   rss  239.8 MB   errors 0
+threads=8    clients=8        37.3 ±    1.7 req/s   mean  210.88 ms   p95  530.31 ±  55.12 ms   cpu  20.7%   rss  342.9 MB   errors 0
+threads=8    clients=16       39.9 ±    1.9 req/s   mean  392.46 ms   p95 2044.14 ± 690.29 ms   cpu  20.8%   rss  455.7 MB   errors 0
+threads=8    clients=32       41.2 ±    1.7 req/s   mean  747.79 ms   p95 4412.52 ± 1464.55 ms   cpu  20.6%   rss  577.3 MB   errors 0
+threads=8    clients=64       49.5 ±    1.1 req/s   mean 1208.49 ms   p95 4432.07 ± 1523.55 ms   cpu  20.6%   rss  708.4 MB   errors 0
+
+Search Service started (pid 18908, SEARCH_THREADS=32, heap 1g)
+threads=32   clients=1        22.4 ±    1.2 req/s   mean   44.78 ms   p95  162.99 ±   9.25 ms   cpu   4.5%   rss  138.5 MB   errors 0
+threads=32   clients=2        33.9 ±    2.3 req/s   mean   59.16 ms   p95  209.36 ±  14.76 ms   cpu   8.8%   rss  171.0 MB   errors 0
+threads=32   clients=4        50.3 ±    0.8 req/s   mean   79.09 ms   p95  267.40 ±   5.13 ms   cpu  17.1%   rss  285.1 MB   errors 0
+threads=32   clients=8        53.2 ±    1.0 req/s   mean  148.52 ms   p95  493.00 ±   6.56 ms   cpu  31.4%   rss  440.4 MB   errors 0
+threads=32   clients=16       45.7 ±    1.5 req/s   mean  342.83 ms   p95 1223.42 ±  46.75 ms   cpu  49.2%   rss  591.6 MB   errors 0
+threads=32   clients=32       44.2 ±    1.1 req/s   mean  697.19 ms   p95 2326.83 ±  84.24 ms   cpu  64.5%   rss  727.3 MB   errors 0
+threads=32   clients=64       42.9 ±    1.9 req/s   mean 1389.84 ms   p95 9879.34 ± 1691.73 ms   cpu  63.5%   rss  754.7 MB   errors 0
+
+Search Service started (pid 23428, SEARCH_THREADS=200, heap 1g)
+threads=200  clients=1        24.2 ±    0.6 req/s   mean   41.30 ms   p95  151.57 ±   3.57 ms   cpu   4.6%   rss  139.2 MB   errors 0
+threads=200  clients=2        37.3 ±    1.1 req/s   mean   53.57 ms   p95  190.80 ±   9.19 ms   cpu   8.7%   rss  181.5 MB   errors 0
+threads=200  clients=4        50.3 ±    2.8 req/s   mean   79.46 ms   p95  267.78 ±  16.12 ms   cpu  17.2%   rss  302.5 MB   errors 0
+threads=200  clients=8        53.4 ±    0.5 req/s   mean  148.03 ms   p95  485.67 ±   9.38 ms   cpu  31.4%   rss  465.1 MB   errors 0
+threads=200  clients=16       45.7 ±    2.5 req/s   mean  344.86 ms   p95 1237.03 ±  41.67 ms   cpu  48.9%   rss  617.2 MB   errors 0
+threads=200  clients=32       39.9 ±    1.4 req/s   mean  772.71 ms   p95 2899.56 ± 121.84 ms   cpu  65.9%   rss  753.7 MB   errors 0
+threads=200  clients=64       40.2 ±    2.3 req/s   mean 1509.27 ms   p95 5970.98 ± 280.13 ms   cpu  74.2%   rss  816.8 MB   errors 0
+Results written to C:\Users\alvar\OneDrive\Escritorio\stage_2\benchmarks\results

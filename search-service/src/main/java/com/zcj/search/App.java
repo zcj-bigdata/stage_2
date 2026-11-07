@@ -15,23 +15,50 @@ import java.sql.Connection;
  *   GET /search?q=&author=&language=&year=&offset=&limit=
  *   GET /books/{book_id}
  *   GET /search/filters
+ *
+ * Configuration (environment variables):
+ *   PORT            default 7003
+ *   DB_PATH         default datamarts/search.db
+ *   SEARCH_THREADS  maximum number of request threads (default 200, Javalin's default)
+ *   SEARCH_REUSE_CONNECTIONS  true (default): each request thread reuses its own SQLite
+ *                   connection; false: a new connection is opened for every request
+ *   CORS_ORIGIN     origin allowed for a browser front-end (default: any origin)
  */
 public class App {
 
     public static void main(String[] args) throws Exception {
-        int port = Config.port(Config.SEARCH_PORT);
+        start(Config.port(Config.SEARCH_PORT), Config.dbPath(), Config.getInt("SEARCH_THREADS", 200),
+                Boolean.parseBoolean(Config.get("SEARCH_REUSE_CONNECTIONS", "true")));
+    }
 
-        try (Connection conn = Database.openFromConfig()) {
+    public static Javalin start(int port, String dbPath, int maxThreads) throws Exception {
+        return start(port, dbPath, maxThreads, true);
+    }
+
+    public static Javalin start(int port, String dbPath, int maxThreads, boolean reuseConnections) throws Exception {
+        // The tables are created here too so that the service starts before the first indexing
+        try (Connection conn = Database.open(dbPath)) {
             Database.createSchema(conn);
         }
 
-        Javalin app = Http.create("search-service");
+        SearchController controller = new SearchController(new SearchRepository(dbPath, reuseConnections));
+        String corsOrigin = Config.get("CORS_ORIGIN", "*");
 
-        // TODO (Search owner): implement the endpoints
-        app.get("/search", Http::notImplemented);
-        app.get("/search/filters", Http::notImplemented);
-        app.get("/books/{book_id}", Http::notImplemented);
+        Javalin app = Http.create("search-service", config -> {
+            config.jetty.threadPool = new org.eclipse.jetty.util.thread.QueuedThreadPool(maxThreads, Math.min(8, maxThreads));
+            config.bundledPlugins.enableCors(cors -> cors.addRule(rule -> {
+                if ("*".equals(corsOrigin)) {
+                    rule.anyHost();
+                } else {
+                    rule.allowHost(corsOrigin);
+                }
+            }));
+        });
 
-        app.start(port);
+        app.get("/search", controller::search);
+        app.get("/search/filters", controller::filters);
+        app.get("/books/{book_id}", controller::book);
+
+        return app.start(port);
     }
 }
