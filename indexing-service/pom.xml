@@ -69,6 +69,22 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
             </plugin>
+
+            <!-- Runs the JMH benchmarks in a separate JVM with the test classpath:
+                 ./mvnw -q -pl indexing-service -am test-compile exec:exec -Dbenchmark.args="..." -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <skip>false</skip>
+                    <executable>${java.home}/bin/java</executable>
+                    <workingDirectory>${maven.multiModuleProjectDirectory}</workingDirectory>
+                    <classpathScope>test</classpathScope>
+                    <!-- English locale: CSV results always use a decimal point -->
+                    <commandlineArgs>-Duser.language=en -Duser.country=US -classpath %classpath org.openjdk.jmh.Main ${benchmark.args}</commandlineArgs>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
