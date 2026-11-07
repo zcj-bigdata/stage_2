@@ -34,6 +34,7 @@ public class App {
 
         try (Connection conn = Database.openFromConfig()) {
             Database.createSchema(conn);
+            LAST_UPDATE = loadLastUpdate(conn);
         }
 
         Javalin app = Http.create("indexing-service");
@@ -95,7 +96,7 @@ public class App {
                     BookIndexer.IndexResult result =
                             BookIndexer.indexBook(conn, datalake, bookId);
 
-                    LAST_UPDATE = Instant.now().toString();
+                    recordLastUpdate(conn);
 
                     Map<String, Object> response = new LinkedHashMap<>();
                     response.put("book_id", result.bookId());
@@ -176,6 +177,7 @@ public class App {
                         }
 
                         removeBooksNotInDatalake(conn, bookIds);
+                        recordLastUpdate(conn);  // same transaction as the rebuild
                         conn.commit();
 
                     } catch (SQLException | IOException | RuntimeException e) {
@@ -189,8 +191,6 @@ public class App {
                         conn.setAutoCommit(previousAutoCommit);
                     }
                 }
-
-                LAST_UPDATE = Instant.now().toString();
 
                 double elapsedSeconds =
                         (System.nanoTime() - startedAt) / 1_000_000_000.0;
@@ -238,6 +238,33 @@ public class App {
         });
 
         app.start(port);
+    }
+
+    /**
+     * The time of the last index update is stored in the datamart (table
+     * {@code index_state}, owned by this service), so {@code last_update} is not lost
+     * when the service restarts. Returns null if the index was never updated.
+     */
+    private static String loadLastUpdate(Connection conn) throws SQLException {
+        try (var st = conn.createStatement()) {
+            st.execute("CREATE TABLE IF NOT EXISTS index_state (key TEXT PRIMARY KEY, value TEXT)");
+        }
+        try (PreparedStatement ps = conn.prepareStatement(
+                "SELECT value FROM index_state WHERE key = 'last_update'");
+             ResultSet rs = ps.executeQuery()) {
+            return rs.next() ? rs.getString(1) : null;
+        }
+    }
+
+    /** Records the current time as the last index update (in the caller's transaction, if any). */
+    private static void recordLastUpdate(Connection conn) throws SQLException {
+        String now = Instant.now().toString();
+        try (PreparedStatement ps = conn.prepareStatement(
+                "INSERT OR REPLACE INTO index_state (key, value) VALUES ('last_update', ?)")) {
+            ps.setString(1, now);
+            ps.executeUpdate();
+        }
+        LAST_UPDATE = now;
     }
 
     private static int count(Connection conn, String sql)
