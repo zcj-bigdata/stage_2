@@ -1,5 +1,0 @@
-benchmark,threads_1_ms_op,threads_2_ms_op,threads_4_ms_op
-extractBookMetadata,0.009,0.009,0.009
-indexFiveSampleBooks,189.972,217.542,265.074
-tokenizeBookBody,7.432,9.218,16.586
-updateOneBookIndex,30.367,35.790,42.958
