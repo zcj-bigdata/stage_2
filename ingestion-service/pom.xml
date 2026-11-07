@@ -16,6 +16,10 @@
 
     <properties>
         <main.class>com.zcj.ingestion.App</main.class>
+        <!-- Benchmark launched by exec:exec (a separate JVM with the test classpath).
+             -Dbenchmark.args="..." passes JMH options, e.g. a benchmark name and -rf csv -->
+        <benchmark.main>org.openjdk.jmh.Main</benchmark.main>
+        <benchmark.args></benchmark.args>
     </properties>
 
     <dependencies>
@@ -39,13 +43,48 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
         </dependency>
+        <!-- JMH: test scope only, so the benchmarks never reach the service jar -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.openjdk.jmh</groupId>
+                            <artifactId>jmh-generator-annprocess</artifactId>
+                            <version>${jmh.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
+            </plugin>
+            <!-- Runs the benchmarks (test code, not part of the service jar) -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                    <executable>${java.home}/bin/java</executable>
+                    <!-- Run from the repository root, so paths are the same as in the README -->
+                    <workingDirectory>${maven.multiModuleProjectDirectory}</workingDirectory>
+                    <classpathScope>test</classpathScope>
+                    <commandlineArgs>-classpath %classpath ${benchmark.main} ${benchmark.args}</commandlineArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>

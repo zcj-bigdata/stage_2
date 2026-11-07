@@ -1,0 +1,44 @@
+### Internal API examples (Ingestion Service)
+#
+# Consumer: Control Module. Run them from IntelliJ (green arrow next to each request) or
+# copy them to curl. Start the service reading the books from sample_data/ (no internet):
+#   Linux / Git Bash:    SAMPLE_DATA=sample_data java -jar ingestion-service/target/ingestion-service-1.0.0.jar
+#   Windows PowerShell:  $env:SAMPLE_DATA="sample_data"; java -jar ingestion-service/target/ingestion-service-1.0.0.jar
+# Without SAMPLE_DATA the books are downloaded from Project Gutenberg.
+#
+# The expected result of each request is written above it, for an empty datalake.
+# The same checks run automatically in
+# ingestion-service/src/test/java/com/zcj/ingestion/IngestionApiTest.java
+
+@ingestion = http://localhost:7001
+
+### Health check -> 200 {"service": "ingestion-service", "status": "running", ...}
+GET {{ingestion}}/status
+
+### Not ingested yet -> 200 {"book_id": 1342, "status": "not_available"}
+GET {{ingestion}}/ingest/status/1342
+
+### Ingest a book -> 200 {"book_id": 1342, "status": "downloaded",
+###                       "path": "datalake/ranges/001000-001999/1342"}
+POST {{ingestion}}/ingest/1342
+
+### Same request again (idempotent) -> 200 with "status": "already_available", no new download
+POST {{ingestion}}/ingest/1342
+
+### Now available -> 200 {"book_id": 1342, "status": "available"}
+GET {{ingestion}}/ingest/status/1342
+
+### More books for the list
+POST {{ingestion}}/ingest/11
+
+### List -> 200 {"count": 2, "books": [11, 1342]}
+GET {{ingestion}}/ingest/list
+
+### Book that does not exist -> 404 {"error": "not_found", ...}  (permanent: do not retry)
+POST {{ingestion}}/ingest/99999999
+
+### Invalid id -> 400 {"error": "invalid_parameter", "message": "book_id must be an integer"}
+POST {{ingestion}}/ingest/abc
+
+### Invalid id -> 400 {"error": "invalid_parameter", "message": "book_id must be positive"}
+GET {{ingestion}}/ingest/status/0

@@ -1,0 +1,27 @@
+### Operational API examples (Control Module)
+#
+# Consumer: operators. The Control Module has no endpoint that starts work: the workflow
+# runs in the background as soon as the process starts. Example with the five sample books:
+#   Linux / Git Bash:    CONTROL_BOOKS=sample java -jar control-module/target/control-module-1.0.0.jar
+#   Windows PowerShell:  $env:CONTROL_BOOKS="sample"; java -jar control-module/target/control-module-1.0.0.jar
+# (Ingestion started with SAMPLE_DATA=sample_data, Indexing and Search running.)
+#
+# The expected results are for an empty control/ folder, once the five books are processed.
+# The orchestration logic is checked automatically in
+# control-module/src/test/java/com/zcj/control/OrchestratorTest.java
+
+@control = http://localhost:7000
+@search = http://localhost:7003
+
+### Health check -> 200 {"service": "control-module", "status": "running", ...}
+GET {{control}}/status
+
+### Workflow state -> 200 {"downloaded": 5, "indexed": 5, "failed": 0, "pending": 0}
+GET {{control}}/control/status
+
+### Coordination cost since start-up -> 200 {"running": false, "workers": 1, "books_indexed": 5,
+###   "avg_ingest_ms": ..., "avg_index_ms": ..., "avg_book_ms": ..., "retries": 0, ...}
+GET {{control}}/control/metrics
+
+### End of the workflow: the books are searchable -> 200, book 1342 with hits 432
+GET {{search}}/search?q=darcy
