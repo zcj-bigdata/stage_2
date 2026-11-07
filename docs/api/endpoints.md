@@ -1,4 +1,4 @@
-# Endpoint inventory — Stage 2 (version 1.0.0)
+# Endpoint inventory — Stage 2 (version 1.1.0)
 
 Full specification: [`openapi.yaml`](openapi.yaml) (OpenAPI 3.0.3).
 All responses are JSON with `snake_case` fields; every error has the body
@@ -47,9 +47,9 @@ contract: the front-end never triggers ingestion or indexing.
 
 | Method | Route | Purpose | Completion | Idempotency / retries |
 |--------|-------|---------|------------|-----------------------|
-| POST | `/index/update/{book_id}` | Extract metadata and update the index for one book | Synchronous: `200` = transaction committed, already searchable | Reindexing replaces the rows (no duplicates). Retry on timeout or `5xx`; `404` = ingest first |
-| POST | `/index/rebuild` | Rebuild everything from the datalake | Synchronous | One rebuild at a time (`409 rebuild_in_progress`) |
-| GET | `/index/status` | Books indexed, last update, index size | — | Read-only |
+| POST | `/index/update/{book_id}` | Extract metadata and update the index for one book | Synchronous: `200` = transaction committed, already searchable | Reindexing replaces the rows (no duplicates). Retry on timeout or `5xx`; `404` = ingest first; `409` = a rebuild is running, retry later |
+| POST | `/index/rebuild` | Rebuild everything from the datalake | Synchronous, one transaction: searches see the old index until the commit | One rebuild at a time (`409 rebuild_in_progress`) |
+| GET | `/index/status` | Books indexed, last update, index size, terms and postings | — | Read-only |
 
 **Caller timeouts** (Control Module): 60 s for ingestion, 120 s for indexing. On timeout the
 caller checks the corresponding status endpoint before retrying with backoff.
@@ -63,12 +63,14 @@ is searchable through `GET /search`.
 |--------|-------|----------|-----------|---------|
 | GET | `/status` | Every service (ports 7000–7003) | Control Module, operators | Health check |
 | GET | `/control/status` | Control Module (7000) | Operators | Downloaded / indexed / failed / pending books |
+| GET | `/control/metrics` | Control Module (7000) | Operators, benchmarks | Coordination cost since start-up: books per second, average ingestion / indexing time, retries, backoff |
 
-## Implementation status
+## Implementation status and validation
 
-| Endpoints | Status |
-|-----------|--------|
-| Front-end (`/search`, `/books/{book_id}`, `/search/filters`) | Implemented and validated (`search-service/src/test/.../SearchApiTest.java`) |
-| `/status` (all services) | Implemented |
-| Internal Ingestion and Indexing endpoints | Agreed contract, implemented by their owners |
-| `/control/status` | Agreed contract, implemented by the Control Module owner |
+Every endpoint of this inventory is implemented.
+
+| Check | What it covers | How to run it |
+|-------|----------------|---------------|
+| `SearchApiTest` and the tests of each service | Front-end contract (search, filters, empty results, invalid parameters, pagination, book details, filter values) and the internal services | `./mvnw test` |
+| [`check_spec.py`](check_spec.py) | Calls the 24 documented cases of the four running services and checks every response against `openapi.yaml` (status code, required and undocumented fields, types, enums) | Start the services with the sample books, then `python docs/api/check_spec.py docs/api/openapi.yaml` (needs `pip install pyyaml`). Expected: `24/24 responses match the specification` |
+| [`examples/*.http`](examples) | Runnable requests with the expected result written above each one | IntelliJ HTTP client or `curl` |
