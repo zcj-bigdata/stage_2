@@ -134,10 +134,19 @@ same body:
 - [`docs/api/openapi.yaml`](docs/api/openapi.yaml): versioned OpenAPI 3.0 specification of
   every endpoint (front-end, internal and operational).
 - [`docs/api/endpoints.md`](docs/api/endpoints.md): endpoint inventory separated by consumer.
-- [`docs/api/examples/search.http`](docs/api/examples/search.http): runnable HTTP examples of
-  the front-end API with their expected results.
+- [`docs/api/examples/`](docs/api/examples): runnable HTTP examples of the front-end,
+  ingestion and control APIs with their expected results.
 - Automated checks of the front-end contract run with the build
   (`search-service/src/test/java/com/zcj/search/SearchApiTest.java`).
+- [`docs/api/check_spec.py`](docs/api/check_spec.py): with the four services running on the
+  sample books, calls every endpoint and checks each response against `openapi.yaml`:
+
+  ```bash
+  pip install pyyaml
+  python docs/api/check_spec.py docs/api/openapi.yaml
+  ```
+
+  Expected result: `24/24 responses match the specification`.
 
 To try the Search Service without the rest of the pipeline, fill the datamart with the
 sample books and start it:
