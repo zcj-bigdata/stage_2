@@ -100,3 +100,10 @@ books and stops; `CONTROL_MAX_BOOKS=0` keeps it running.
 ./mvnw -q -pl control-module -am test-compile exec:exec \
     -Dbenchmark.args="ControlStateBenchmark -rf csv -rff control-module/jmh-results.csv"
 ```
+
+- `benchmark/PipelineLoadBenchmark`: load benchmark of the whole pipeline. It starts the
+  Ingestion and Indexing services and the Control Module from their jars, processes 100 books
+  with 1, 2, 4 and 8 workers (5 runs each) and records books per second, time per call,
+  retries, CPU and memory of each process. All the benchmarks of this module and of the
+  Ingestion Service run with one command:
+  [`docs/benchmarks/ingestion-control/run_benchmarks.cmd`](../docs/benchmarks/ingestion-control/README.md).

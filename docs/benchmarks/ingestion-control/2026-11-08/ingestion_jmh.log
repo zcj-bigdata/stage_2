@@ -1,0 +1,592 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.fusesource.jansi.internal.JansiLoader in an unnamed module (file:/C:/Users/jaavi/.m2/wrapper/dists/apache-maven-3.9.9/8e74001100ff70d6af083c5511fcc5ec49282d7017cde82c3698eee8fdf86698/lib/jansi-2.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper (file:/C:/Users/jaavi/.m2/wrapper/dists/apache-maven-3.9.9/8e74001100ff70d6af083c5511fcc5ec49282d7017cde82c3698eee8fdf86698/lib/guava-33.2.1-jre.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# JMH version: 1.37
+# VM version: JDK 25.0.1, OpenJDK 64-Bit Server VM, 25.0.1+8-27
+# VM invoker: C:\Users\jaavi\.jdks\openjdk-25.0.1\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.ingestion.benchmark.IngestionBenchmark.ingestAlreadyAvailable
+
+# Run progress: 0.00% complete, ETA 00:03:00
+# Fork: 1 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh18080703760106551954\datalake (0 recovered, 0 temporary files removed)
+0.002 ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9502297844784024388\datalake (0 recovered, 0 temporary files removed)
+0.002 ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2783643681969363131\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17072400366588082979\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh13194770644325186538\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh13808489654401920887\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9424663189502273827\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5090388507115539971\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh627670662896861500\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16269243382899097073\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh10200779121288819086\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh13158353248998278266\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh15693112153959595623\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh11771140374005136934\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh14922268488380675504\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+
+# Run progress: 8.33% complete, ETA 00:03:05
+# Fork: 2 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3456977988377764174\datalake (0 recovered, 0 temporary files removed)
+0.002 ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3424795889494044480\datalake (0 recovered, 0 temporary files removed)
+0.002 ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh13015155834772300545\datalake (0 recovered, 0 temporary files removed)
+0.002 ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh838777193669067096\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2212965482434000650\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17618037851936668417\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh10377372109242748926\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh4645568600094940318\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh15267704513162851092\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17625000746885390259\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh10323917572679255332\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh950422208983362322\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh8775009238151664131\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2670463493745220811\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh15137891721899771151\datalake (0 recovered, 0 temporary files removed)
+0.001 ms/op
+
+
+Result "com.zcj.ingestion.benchmark.IngestionBenchmark.ingestAlreadyAvailable":
+  0.001 ±(99.9%) 0.001 ms/op [Average]
+  (min, avg, max) = (0.001, 0.001, 0.001), stdev = 0.001
+  CI (99.9%): [0.001, 0.001] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 25.0.1, OpenJDK 64-Bit Server VM, 25.0.1+8-27
+# VM invoker: C:\Users\jaavi\.jdks\openjdk-25.0.1\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.ingestion.benchmark.IngestionBenchmark.ingestNewBook_1thread
+
+# Run progress: 16.67% complete, ETA 00:02:46
+# Fork: 1 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh7710656344918546367\datalake (0 recovered, 0 temporary files removed)
+17.071 ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh15891064135506939758\datalake (0 recovered, 0 temporary files removed)
+15.249 ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh11893788107975259466\datalake (0 recovered, 0 temporary files removed)
+13.012 ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2511547954514039146\datalake (0 recovered, 0 temporary files removed)
+13.821 ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17840166906097328820\datalake (0 recovered, 0 temporary files removed)
+12.502 ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh6687157016562712366\datalake (0 recovered, 0 temporary files removed)
+11.793 ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5433619411623040976\datalake (0 recovered, 0 temporary files removed)
+11.587 ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh10149235061406787161\datalake (0 recovered, 0 temporary files removed)
+11.448 ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5091496425214123071\datalake (0 recovered, 0 temporary files removed)
+12.621 ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12665283422732529979\datalake (0 recovered, 0 temporary files removed)
+12.285 ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2881039595706116241\datalake (0 recovered, 0 temporary files removed)
+11.333 ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16359153405225103303\datalake (0 recovered, 0 temporary files removed)
+11.181 ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12570237801529495514\datalake (0 recovered, 0 temporary files removed)
+11.729 ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh8764182538371155309\datalake (0 recovered, 0 temporary files removed)
+11.037 ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17804283659130397003\datalake (0 recovered, 0 temporary files removed)
+11.130 ms/op
+
+# Run progress: 25.00% complete, ETA 00:02:31
+# Fork: 2 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh7079723907774607310\datalake (0 recovered, 0 temporary files removed)
+15.929 ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9500491846766026701\datalake (0 recovered, 0 temporary files removed)
+15.111 ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3669720864673754007\datalake (0 recovered, 0 temporary files removed)
+16.053 ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh15526603125749372178\datalake (0 recovered, 0 temporary files removed)
+18.140 ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh14887143467586064320\datalake (0 recovered, 0 temporary files removed)
+20.721 ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh13972143934102099889\datalake (0 recovered, 0 temporary files removed)
+18.045 ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh11062607235757881814\datalake (0 recovered, 0 temporary files removed)
+21.023 ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh6399746350594832934\datalake (0 recovered, 0 temporary files removed)
+18.634 ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh1105333348704160235\datalake (0 recovered, 0 temporary files removed)
+18.736 ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh4766195036883771099\datalake (0 recovered, 0 temporary files removed)
+19.009 ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh15566956660749941660\datalake (0 recovered, 0 temporary files removed)
+19.370 ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5303974792737327810\datalake (0 recovered, 0 temporary files removed)
+17.348 ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16910896637100718560\datalake (0 recovered, 0 temporary files removed)
+17.594 ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16141682527737007909\datalake (0 recovered, 0 temporary files removed)
+18.406 ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh15309514005812476935\datalake (0 recovered, 0 temporary files removed)
+19.877 ms/op
+
+
+Result "com.zcj.ingestion.benchmark.IngestionBenchmark.ingestNewBook_1thread":
+  15.209 ±(99.9%) 3.283 ms/op [Average]
+  (min, avg, max) = (11.037, 15.209, 21.023), stdev = 3.781
+  CI (99.9%): [11.926, 18.492] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 25.0.1, OpenJDK 64-Bit Server VM, 25.0.1+8-27
+# VM invoker: C:\Users\jaavi\.jdks\openjdk-25.0.1\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.ingestion.benchmark.IngestionBenchmark.ingestNewBook_2threads
+
+# Run progress: 33.33% complete, ETA 00:02:15
+# Fork: 1 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3866199512864710261\datalake (0 recovered, 0 temporary files removed)
+27.284 ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9073689639321041624\datalake (0 recovered, 0 temporary files removed)
+14.613 ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2516657926374909675\datalake (0 recovered, 0 temporary files removed)
+14.153 ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh8138701970056442670\datalake (0 recovered, 0 temporary files removed)
+14.364 ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh13753377420066949112\datalake (0 recovered, 0 temporary files removed)
+13.578 ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12634591430423940425\datalake (0 recovered, 0 temporary files removed)
+13.508 ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh544711480216173409\datalake (0 recovered, 0 temporary files removed)
+12.607 ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5773535151007317071\datalake (0 recovered, 0 temporary files removed)
+12.736 ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16111827188602342448\datalake (0 recovered, 0 temporary files removed)
+14.651 ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16638175956153309024\datalake (0 recovered, 0 temporary files removed)
+12.852 ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9180435549503545138\datalake (0 recovered, 0 temporary files removed)
+19.487 ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh8861338129964791186\datalake (0 recovered, 0 temporary files removed)
+23.906 ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh13486912759600626019\datalake (0 recovered, 0 temporary files removed)
+24.538 ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh4477313077159382557\datalake (0 recovered, 0 temporary files removed)
+28.744 ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5509126246036969277\datalake (0 recovered, 0 temporary files removed)
+25.543 ms/op
+
+# Run progress: 41.67% complete, ETA 00:01:59
+# Fork: 2 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5458667257651818303\datalake (0 recovered, 0 temporary files removed)
+31.188 ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16565632966791244138\datalake (0 recovered, 0 temporary files removed)
+29.903 ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh8743565831994489661\datalake (0 recovered, 0 temporary files removed)
+25.234 ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh4299116157529260714\datalake (0 recovered, 0 temporary files removed)
+25.002 ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17644840068977058876\datalake (0 recovered, 0 temporary files removed)
+28.489 ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16271956113472875042\datalake (0 recovered, 0 temporary files removed)
+34.521 ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh736116202325122407\datalake (0 recovered, 0 temporary files removed)
+14.722 ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh7142500205566212456\datalake (0 recovered, 0 temporary files removed)
+15.857 ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5620289473557234258\datalake (0 recovered, 0 temporary files removed)
+15.282 ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh14060776671907547506\datalake (0 recovered, 0 temporary files removed)
+15.014 ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh14050522531591449975\datalake (0 recovered, 0 temporary files removed)
+15.318 ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh7784017672361636300\datalake (0 recovered, 0 temporary files removed)
+19.067 ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17328493010692842571\datalake (0 recovered, 0 temporary files removed)
+20.839 ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh10875486154134868963\datalake (0 recovered, 0 temporary files removed)
+30.740 ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2168659062909857587\datalake (0 recovered, 0 temporary files removed)
+19.887 ms/op
+
+
+Result "com.zcj.ingestion.benchmark.IngestionBenchmark.ingestNewBook_2threads":
+  19.491 ±(99.9%) 5.667 ms/op [Average]
+  (min, avg, max) = (12.607, 19.491, 34.521), stdev = 6.526
+  CI (99.9%): [13.824, 25.158] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 25.0.1, OpenJDK 64-Bit Server VM, 25.0.1+8-27
+# VM invoker: C:\Users\jaavi\.jdks\openjdk-25.0.1\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 4 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.ingestion.benchmark.IngestionBenchmark.ingestNewBook_4threads
+
+# Run progress: 50.00% complete, ETA 00:01:45
+# Fork: 1 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3685533408659369934\datalake (0 recovered, 0 temporary files removed)
+36.617 ±(99.9%) 6.798 ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16313260133481339658\datalake (0 recovered, 0 temporary files removed)
+48.163 ±(99.9%) 9.751 ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh15135464070529882135\datalake (0 recovered, 0 temporary files removed)
+36.893 ±(99.9%) 3.541 ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh4394874963378266885\datalake (0 recovered, 0 temporary files removed)
+34.477 ±(99.9%) 6.671 ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh18266118578850681878\datalake (0 recovered, 0 temporary files removed)
+49.204 ±(99.9%) 12.406 ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh8799502586722164429\datalake (0 recovered, 0 temporary files removed)
+176.284 ±(99.9%) 29.607 ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9444293096432782958\datalake (0 recovered, 0 temporary files removed)
+54.084 ±(99.9%) 5.971 ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh14257932018418090539\datalake (0 recovered, 0 temporary files removed)
+34.435 ±(99.9%) 7.355 ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2573657526801254584\datalake (0 recovered, 0 temporary files removed)
+30.241 ±(99.9%) 5.619 ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh1906694285184107641\datalake (0 recovered, 0 temporary files removed)
+59.962 ±(99.9%) 16.215 ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh13448709214524591355\datalake (0 recovered, 0 temporary files removed)
+24.402 ±(99.9%) 5.094 ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17718093265885944197\datalake (0 recovered, 0 temporary files removed)
+37.981 ±(99.9%) 10.071 ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5347653306068280896\datalake (0 recovered, 0 temporary files removed)
+50.505 ±(99.9%) 17.001 ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh218532475377708395\datalake (0 recovered, 0 temporary files removed)
+24.631 ±(99.9%) 2.194 ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9530249962577436300\datalake (0 recovered, 0 temporary files removed)
+46.139 ±(99.9%) 13.699 ms/op
+
+# Run progress: 58.33% complete, ETA 00:01:31
+# Fork: 2 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9524876758590702481\datalake (0 recovered, 0 temporary files removed)
+59.503 ±(99.9%) 10.975 ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh7863780007660239048\datalake (0 recovered, 0 temporary files removed)
+56.492 ±(99.9%) 17.783 ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17747507653949051609\datalake (0 recovered, 0 temporary files removed)
+52.734 ±(99.9%) 14.894 ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh8381716844116087721\datalake (0 recovered, 0 temporary files removed)
+58.660 ±(99.9%) 24.488 ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh18162835030196918325\datalake (0 recovered, 0 temporary files removed)
+49.160 ±(99.9%) 4.961 ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2680819012417457984\datalake (0 recovered, 0 temporary files removed)
+51.386 ±(99.9%) 4.151 ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3552005314913901793\datalake (0 recovered, 0 temporary files removed)
+49.787 ±(99.9%) 15.769 ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh14092450985848050220\datalake (0 recovered, 0 temporary files removed)
+60.505 ±(99.9%) 14.445 ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh7901011995487050527\datalake (0 recovered, 0 temporary files removed)
+24.663 ±(99.9%) 2.282 ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3701017383157202283\datalake (0 recovered, 0 temporary files removed)
+23.722 ±(99.9%) 2.586 ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh14393334180707198233\datalake (0 recovered, 0 temporary files removed)
+28.042 ±(99.9%) 3.856 ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh7106506390872130110\datalake (0 recovered, 0 temporary files removed)
+24.693 ±(99.9%) 0.774 ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9571165190065565069\datalake (0 recovered, 0 temporary files removed)
+26.065 ±(99.9%) 4.510 ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3376127878844681039\datalake (0 recovered, 0 temporary files removed)
+25.767 ±(99.9%) 1.878 ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12697835403376979621\datalake (0 recovered, 0 temporary files removed)
+25.346 ±(99.9%) 3.551 ms/op
+
+
+Result "com.zcj.ingestion.benchmark.IngestionBenchmark.ingestNewBook_4threads":
+  43.932 ±(99.9%) 29.382 ms/op [Average]
+  (min, avg, max) = (23.722, 43.932, 176.284), stdev = 33.837
+  CI (99.9%): [14.550, 73.314] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 25.0.1, OpenJDK 64-Bit Server VM, 25.0.1+8-27
+# VM invoker: C:\Users\jaavi\.jdks\openjdk-25.0.1\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.ingestion.benchmark.IngestionBenchmark.splitBook
+
+# Run progress: 66.67% complete, ETA 00:01:15
+# Fork: 1 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh1278010607797851906\datalake (0 recovered, 0 temporary files removed)
+5.053 ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh4049556151081099611\datalake (0 recovered, 0 temporary files removed)
+3.836 ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3238918162101617\datalake (0 recovered, 0 temporary files removed)
+4.618 ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17250730294283611088\datalake (0 recovered, 0 temporary files removed)
+4.812 ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh10087318706067941855\datalake (0 recovered, 0 temporary files removed)
+4.567 ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh8846049662012256376\datalake (0 recovered, 0 temporary files removed)
+4.780 ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12449273490619106540\datalake (0 recovered, 0 temporary files removed)
+4.677 ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17154563133509857685\datalake (0 recovered, 0 temporary files removed)
+4.779 ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh11341379837515494910\datalake (0 recovered, 0 temporary files removed)
+4.819 ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh11109572547725744044\datalake (0 recovered, 0 temporary files removed)
+5.300 ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh6131814564373355999\datalake (0 recovered, 0 temporary files removed)
+5.096 ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh1932857206478125332\datalake (0 recovered, 0 temporary files removed)
+5.206 ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3159791347306243562\datalake (0 recovered, 0 temporary files removed)
+5.147 ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh4529127607242594236\datalake (0 recovered, 0 temporary files removed)
+5.067 ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12947742557136511458\datalake (0 recovered, 0 temporary files removed)
+5.068 ms/op
+
+# Run progress: 75.00% complete, ETA 00:00:56
+# Fork: 2 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh305597255353632615\datalake (0 recovered, 0 temporary files removed)
+4.634 ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17580940750450212215\datalake (0 recovered, 0 temporary files removed)
+3.431 ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5559640269293750775\datalake (0 recovered, 0 temporary files removed)
+4.964 ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh14578898620048746328\datalake (0 recovered, 0 temporary files removed)
+4.890 ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh13866114553384764508\datalake (0 recovered, 0 temporary files removed)
+4.552 ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh8782601529932077118\datalake (0 recovered, 0 temporary files removed)
+4.577 ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2551896542748138947\datalake (0 recovered, 0 temporary files removed)
+4.669 ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9255085353168004114\datalake (0 recovered, 0 temporary files removed)
+4.652 ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh14755377410921428482\datalake (0 recovered, 0 temporary files removed)
+4.786 ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh15793331960248386108\datalake (0 recovered, 0 temporary files removed)
+5.126 ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh6150373713067555799\datalake (0 recovered, 0 temporary files removed)
+5.105 ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh18047152472771860616\datalake (0 recovered, 0 temporary files removed)
+5.028 ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh76887506401178215\datalake (0 recovered, 0 temporary files removed)
+4.893 ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5420977865985784822\datalake (0 recovered, 0 temporary files removed)
+4.926 ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9148046962963241925\datalake (0 recovered, 0 temporary files removed)
+4.819 ms/op
+
+
+Result "com.zcj.ingestion.benchmark.IngestionBenchmark.splitBook":
+  4.926 ±(99.9%) 0.181 ms/op [Average]
+  (min, avg, max) = (4.577, 4.926, 5.300), stdev = 0.209
+  CI (99.9%): [4.745, 5.108] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 25.0.1, OpenJDK 64-Bit Server VM, 25.0.1+8-27
+# VM invoker: C:\Users\jaavi\.jdks\openjdk-25.0.1\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.zcj.ingestion.benchmark.IngestionBenchmark.statusLookup
+
+# Run progress: 83.33% complete, ETA 00:00:37
+# Fork: 1 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh2645376714883041806\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh8387017613590456596\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9244557946252619390\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh11505383144829638221\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12154888130999172115\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh17223578713349765188\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12139216400526891846\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh10319997151681084493\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh11971719570633352734\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh11943216389698217524\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12458635936007903912\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3754657300895476786\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh4050466730566695813\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh1990446229764001222\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh10678852685463109343\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+
+# Run progress: 91.67% complete, ETA 00:00:18
+# Fork: 2 of 2
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.openjdk.jmh.util.Utils (file:/C:/Users/jaavi/.m2/repository/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar)
+WARNING: Please consider reporting this to the maintainers of class org.openjdk.jmh.util.Utils
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+# Warmup Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12909260942651528710\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+# Warmup Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh15180229836401247277\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+# Warmup Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh5105242221365149667\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+# Warmup Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3361475006918415936\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+# Warmup Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh3922274145236944396\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   1: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh13468404787410041626\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   2: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh9340035803277994345\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   3: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh12388171411384018609\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   4: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh14313949751976889996\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   5: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh4741198799767752351\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   6: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16496219724422161113\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   7: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16180399416423650016\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   8: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh16974085082941939888\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration   9: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh1555959030849253458\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+Iteration  10: [INGESTION] 0 books available in C:\Users\jaavi\AppData\Local\Temp\ingestion-jmh722979408414584017\datalake (0 recovered, 0 temporary files removed)
+≈ 10⁻⁵ ms/op
+
+
+Result "com.zcj.ingestion.benchmark.IngestionBenchmark.statusLookup":
+  ≈ 10⁻⁵ ms/op
+
+
+# Run complete. Total time: 00:03:39
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                  Mode  Cnt   Score    Error  Units
+IngestionBenchmark.ingestAlreadyAvailable  avgt   20   0.001 ±  0.001  ms/op
+IngestionBenchmark.ingestNewBook_1thread   avgt   20  15.209 ±  3.283  ms/op
+IngestionBenchmark.ingestNewBook_2threads  avgt   20  19.491 ±  5.667  ms/op
+IngestionBenchmark.ingestNewBook_4threads  avgt   20  43.932 ± 29.382  ms/op
+IngestionBenchmark.splitBook               avgt   20   4.926 ±  0.181  ms/op
+IngestionBenchmark.statusLookup            avgt   20  ≈ 10⁻⁵           ms/op
+
+Benchmark result is saved to docs\benchmarks\ingestion-control\2026-11-08\ingestion_jmh.csv
