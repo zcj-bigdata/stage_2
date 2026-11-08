@@ -17,7 +17,9 @@
     <properties>
         <main.class>com.zcj.control.App</main.class>
         <!-- Benchmark launched by exec:exec (a separate JVM with the test classpath).
-             -Dbenchmark.args="..." passes JMH options, e.g. a benchmark name and -rf csv -->
+             -Dbenchmark.args="..." passes JMH options, e.g. a benchmark name and -rf csv.
+             -Dbenchmark.main=com.zcj.control.benchmark.PipelineLoadBenchmark runs the
+             load benchmark of the whole pipeline instead of JMH. -->
         <benchmark.main>org.openjdk.jmh.Main</benchmark.main>
         <benchmark.args></benchmark.args>
     </properties>
@@ -83,7 +85,7 @@
                     <!-- Run from the repository root, so paths are the same as in the README -->
                     <workingDirectory>${maven.multiModuleProjectDirectory}</workingDirectory>
                     <classpathScope>test</classpathScope>
-                    <commandlineArgs>-classpath %classpath ${benchmark.main} ${benchmark.args}</commandlineArgs>
+                    <commandlineArgs>-Duser.language=en -Duser.country=US -classpath %classpath ${benchmark.main} ${benchmark.args}</commandlineArgs>
                 </configuration>
             </plugin>
         </plugins>
