@@ -1,6 +1,6 @@
-# Ingestion Service and Control Module benchmarks
+﻿# Ingestion Service and Control Module benchmarks
 
-Three benchmarks, run on the same host as the Indexing and Search benchmarks.
+Three benchmarks. The results in 2026-11-08 were run on a different laptop from the Indexing and Search benchmarks (see host.txt).
 
 ## 1. JMH: Ingestion Service (`IngestionBenchmark`)
 

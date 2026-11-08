@@ -1,0 +1,7 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.zcj.ingestion.benchmark.IngestionBenchmark.ingestAlreadyAvailable","avgt",1,20,0.001231,0.000013,"ms/op"
+"com.zcj.ingestion.benchmark.IngestionBenchmark.ingestNewBook_1thread","avgt",1,20,15.209211,3.283261,"ms/op"
+"com.zcj.ingestion.benchmark.IngestionBenchmark.ingestNewBook_2threads","avgt",2,20,19.490912,5.667249,"ms/op"
+"com.zcj.ingestion.benchmark.IngestionBenchmark.ingestNewBook_4threads","avgt",4,20,43.931936,29.382342,"ms/op"
+"com.zcj.ingestion.benchmark.IngestionBenchmark.splitBook","avgt",1,20,4.926099,0.181465,"ms/op"
+"com.zcj.ingestion.benchmark.IngestionBenchmark.statusLookup","avgt",1,20,0.000009,0.000000,"ms/op"

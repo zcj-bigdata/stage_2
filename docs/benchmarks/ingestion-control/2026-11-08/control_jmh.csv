@@ -1,0 +1,16 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: books"
+"com.zcj.control.benchmark.ControlStateBenchmark.claimAndRelease","avgt",1,20,0.141553,0.001486,"us/op",1000
+"com.zcj.control.benchmark.ControlStateBenchmark.claimAndRelease","avgt",1,20,0.148836,0.004300,"us/op",10000
+"com.zcj.control.benchmark.ControlStateBenchmark.claimAndRelease","avgt",1,20,0.126502,0.039717,"us/op",70000
+"com.zcj.control.benchmark.ControlStateBenchmark.recordBook_1thread","avgt",1,20,2523.324244,599.048418,"us/op",1000
+"com.zcj.control.benchmark.ControlStateBenchmark.recordBook_1thread","avgt",1,20,2763.390825,682.339173,"us/op",10000
+"com.zcj.control.benchmark.ControlStateBenchmark.recordBook_1thread","avgt",1,20,2072.547780,141.346995,"us/op",70000
+"com.zcj.control.benchmark.ControlStateBenchmark.recordBook_2threads","avgt",2,20,23166.867240,66934.240944,"us/op",1000
+"com.zcj.control.benchmark.ControlStateBenchmark.recordBook_2threads","avgt",2,20,5059.765553,992.968267,"us/op",10000
+"com.zcj.control.benchmark.ControlStateBenchmark.recordBook_2threads","avgt",2,20,5425.588884,1207.212680,"us/op",70000
+"com.zcj.control.benchmark.ControlStateBenchmark.recordBook_4threads","avgt",4,20,264552.503675,316318.250733,"us/op",1000
+"com.zcj.control.benchmark.ControlStateBenchmark.recordBook_4threads","avgt",4,20,15871.952568,6415.773055,"us/op",10000
+"com.zcj.control.benchmark.ControlStateBenchmark.recordBook_4threads","avgt",4,20,4971256.376250,18930857.681894,"us/op",70000
+"com.zcj.control.benchmark.ControlStateBenchmark.snapshot","avgt",1,20,0.048434,0.001905,"us/op",1000
+"com.zcj.control.benchmark.ControlStateBenchmark.snapshot","avgt",1,20,0.047642,0.001384,"us/op",10000
+"com.zcj.control.benchmark.ControlStateBenchmark.snapshot","avgt",1,20,0.053663,0.001824,"us/op",70000
