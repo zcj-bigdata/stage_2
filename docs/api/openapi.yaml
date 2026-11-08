@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: ZCJ Search Engine — Stage 2 API
-  version: 1.0.0
+  version: 1.1.0
   description: |
     API of the Stage 2 search engine (group ZCJ). Four processes run on the same host:
 
@@ -344,7 +344,9 @@ paths:
         A failure rolls back the transaction and leaves the previous state untouched.
 
         **Idempotency**: reindexing a book replaces its rows (no duplicates). Concurrent
-        updates are serialized by the database writer lock.
+        updates are serialized inside the service (one indexing operation at a time) and by
+        the database writer lock. While a rebuild is running, updates are rejected with
+        `409 rebuild_in_progress`; the caller retries later.
 
         **Caller (Control Module)**: call it only after the ingestion of the book has
         completed. Timeout 120 s; on timeout or `5xx` retry with backoff (safe).
@@ -361,14 +363,15 @@ paths:
           content:
             application/json:
               schema: {$ref: '#/components/schemas/IndexUpdateResponse'}
-              example: {book_id: 1342, index: updated}
+              example: {book_id: 1342, index: updated, total_tokens: 127254, unique_terms: 6342}
         '400': {$ref: '#/components/responses/InvalidParameter'}
         '404':
           description: The book is not available in the datalake.
           content:
             application/json:
               schema: {$ref: '#/components/schemas/Error'}
-              example: {error: not_found, message: Book 1342 is not in the datalake}
+              example: {error: not_found, message: 'Book files not found: 1342'}
+        '409': {$ref: '#/components/responses/RebuildInProgress'}
         '500': {$ref: '#/components/responses/InternalError'}
 
   /index/rebuild:
@@ -378,8 +381,14 @@ paths:
       summary: Rebuild metadata and inverted index from the whole datalake
       description: |
         Synchronous: responds when every book of the datalake has been processed.
-        Each book is committed in its own transaction, so searches keep working during
-        the rebuild. Only one rebuild can run at a time.
+
+        **Publication**: the whole rebuild runs in **one transaction**. Searches keep
+        reading the previous index while it runs (WAL mode) and see the new index only
+        after the commit; a failure rolls everything back. Books that are no longer in
+        the datalake are removed from the datamart.
+
+        **Concurrency**: only one rebuild can run at a time; a second call, or a
+        `POST /index/update/{book_id}` during the rebuild, receives `409 rebuild_in_progress`.
       x-provider: Indexing Service
       x-consumers: [Control Module, Operator]
       servers:
@@ -390,13 +399,14 @@ paths:
           content:
             application/json:
               schema: {$ref: '#/components/schemas/RebuildResponse'}
-              example: {books_processed: 1000, elapsed_time: 35.2s}
-        '409':
-          description: A rebuild is already running.
+              example: {books_processed: 5, elapsed_time: 1.4s, total_tokens: 1072467, total_postings: 33796}
+        '404':
+          description: The datalake has no books folder yet.
           content:
             application/json:
               schema: {$ref: '#/components/schemas/Error'}
-              example: {error: rebuild_in_progress, message: A rebuild is already running}
+              example: {error: not_found, message: Datalake ranges directory not found}
+        '409': {$ref: '#/components/responses/RebuildInProgress'}
         '500': {$ref: '#/components/responses/InternalError'}
 
   /index/status:
@@ -414,7 +424,7 @@ paths:
           content:
             application/json:
               schema: {$ref: '#/components/schemas/IndexStatus'}
-              example: {books_indexed: 1200, last_update: '2026-10-08T14:05:00Z', index_size_mb: 42.7}
+              example: {books_indexed: 5, last_update: '2026-11-07T12:47:09.691Z', index_size_mb: 4.4, total_terms: 16804, total_postings: 33796}
         '500': {$ref: '#/components/responses/InternalError'}
 
   # -------------------------------------------------------------------------
@@ -467,6 +477,42 @@ paths:
               schema: {$ref: '#/components/schemas/WorkflowStatus'}
               example: {downloaded: 120, indexed: 118, failed: 3, pending: 2}
 
+  /control/metrics:
+    get:
+      tags: [Operational]
+      operationId: getCoordinationMetrics
+      summary: Coordination cost measured by the Control Module
+      description: |
+        Counters and times measured on the caller side since the Control Module started,
+        so they include HTTP, waiting and retries. `books_per_second` is computed over
+        `active_s` (from the first call to the last indexed book), not over the uptime.
+        Read-only.
+      x-provider: Control Module
+      x-consumers: [Operator, Benchmarks]
+      servers:
+        - url: http://localhost:7000
+      responses:
+        '200':
+          description: Coordination metrics.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ControlMetrics'}
+              example:
+                running: true
+                workers: 1
+                uptime_s: 12.5
+                books_indexed: 5
+                books_failed: 0
+                active_s: 1.52
+                books_per_second: 3.29
+                ingest_calls: 5
+                avg_ingest_ms: 38.1
+                index_calls: 5
+                avg_index_ms: 251.7
+                avg_book_ms: 290.4
+                retries: 0
+                backoff_wait_ms: 0
+
 components:
 
   parameters:
@@ -479,6 +525,12 @@ components:
       example: 1342
 
   responses:
+    RebuildInProgress:
+      description: A rebuild is running; retry after it finishes.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+          example: {error: rebuild_in_progress, message: A rebuild is already running}
     InvalidParameter:
       description: A parameter is malformed.
       content:
@@ -595,6 +647,8 @@ components:
       properties:
         book_id: {type: integer}
         index: {type: string, enum: [updated]}
+        total_tokens: {type: integer, description: Tokens in the body of the book}
+        unique_terms: {type: integer, description: Distinct terms of the book (postings written)}
 
     RebuildResponse:
       type: object
@@ -602,6 +656,8 @@ components:
       properties:
         books_processed: {type: integer}
         elapsed_time: {type: string, example: 35.2s}
+        total_tokens: {type: integer}
+        total_postings: {type: integer, description: Postings written during the rebuild}
 
     IndexStatus:
       type: object
@@ -609,7 +665,9 @@ components:
       properties:
         books_indexed: {type: integer}
         last_update: {type: string, format: date-time, nullable: true}
-        index_size_mb: {type: number}
+        index_size_mb: {type: number, description: Size of the datamart file}
+        total_terms: {type: integer, description: Distinct terms in the inverted index}
+        total_postings: {type: integer, description: 'Rows of the inverted index, one per (term, book) pair'}
 
     ServiceStatus:
       type: object
@@ -627,3 +685,23 @@ components:
         indexed: {type: integer}
         failed: {type: integer}
         pending: {type: integer}
+
+    ControlMetrics:
+      type: object
+      required: [running, workers, uptime_s, books_indexed, books_failed, active_s, books_per_second,
+                 ingest_calls, avg_ingest_ms, index_calls, avg_index_ms, avg_book_ms, retries, backoff_wait_ms]
+      properties:
+        running: {type: boolean, description: Whether the background loop is running}
+        workers: {type: integer, description: Books processed in parallel}
+        uptime_s: {type: number}
+        books_indexed: {type: integer}
+        books_failed: {type: integer}
+        active_s: {type: number, description: Time from the first call to the last indexed book}
+        books_per_second: {type: number}
+        ingest_calls: {type: integer}
+        avg_ingest_ms: {type: number}
+        index_calls: {type: integer}
+        avg_index_ms: {type: number}
+        avg_book_ms: {type: number, description: 'Ingestion and indexing of one book, including retries'}
+        retries: {type: integer}
+        backoff_wait_ms: {type: number}
